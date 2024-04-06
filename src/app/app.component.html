@@ -321,7 +321,7 @@
           </svg>
         </a>
       </div>
-    </div>
+    </div>s
   </div>
 </main> -->
 
@@ -333,5 +333,6 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<app-header></app-header>
+<app-header *ngIf="variableValue"></app-header>
+<!-- <app-auth *ngIf="showheader == false"></app-auth> -->
 <router-outlet></router-outlet>

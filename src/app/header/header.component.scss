@@ -1,0 +1,20 @@
+.nav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+    padding: 5px 0; /* Add some padding (optional) */
+  }
+
+  .nav-link {
+    text-align: right;
+  }
+  
+  
+  .pi {
+    cursor: pointer;
+    text-align: right; /* Change cursor to pointer when hovering over the icon */
+  }
+
+  .pi-user {
+    text-align: right;
+  }

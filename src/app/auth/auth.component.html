@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="signup-form">
+        <!-- <h2>Signup Form</h2> -->
+        <form [formGroup]="LoginForm" *ngIf="!mode">
+            <label class="singup-label">Email</label>
+
+        <input class="form-group" formControlName="email" (keyup)="spaceValidation($event)">
+        <div class="form-error" *ngIf="LoginForm.get('email')?.errors && LoginForm.get('email')?.dirty">
+          <ng-container *ngIf="LoginForm.get('email')?.hasError('required')">Email is required</ng-container>
+          <ng-container *ngIf="LoginForm.get('email')?.hasError('email')">Please enter a valid email</ng-container>
+        </div>
+            
+            <label class="singup-label">Password</label>
+        <div class="form-pass">
+          <input class="form-group" formControlName="password" [type]="isPassVisivble ? 'text' : 'password'">
+          <span class="pass-eye" (click)="openPass()"><i class="fas "
+              [ngClass]="{'fa-eye-slash':!isPassVisivble,'fa-eye':isPassVisivble}"></i></span>
+        </div>
+
+        <div class="form-error" *ngIf="LoginForm.get('password')?.errors && LoginForm.get('password')?.dirty">
+          <ng-container *ngIf="LoginForm.get('password')?.hasError('required')">Password is required</ng-container>
+          <ng-container *ngIf="LoginForm.get('password')?.hasError('minlength')">Password must be at least 8
+            characters</ng-container>
+          <ng-container *ngIf="LoginForm.get('password')?.hasError('maxlength')">Password must not exceed 20
+            characters</ng-container>
+        </div>
+
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
+            <a class="form-group" (click)="switchMode()" *ngIf="!mode">New user Signup here ?</a>
+            <!-- <br> -->
+            <!-- <a class="form-group" (click)="switchMode()" *ngIF="mode">Forgot Password ?</a> -->
+        </form>
+
+        <form [formGroup]="signUpForm" *ngIf="mode">
+            <label class="singup-label">Email</label>
+
+        <input class="form-group" formControlName="email" (keyup)="spaceValidation($event)">
+        <div class="form-error" *ngIf="signUpForm.get('email')?.errors && signUpForm.get('email')?.dirty">
+          <ng-container *ngIf="signUpForm.get('email')?.hasError('required')">Email is required</ng-container>
+          <ng-container *ngIf="signUpForm.get('email')?.hasError('email')">Please enter a valid email</ng-container>
+        </div>
+            
+            <label class="singup-label">New Password</label>
+        <div class="form-pass">
+          <input class="form-group" formControlName="NewPassword" [type]="isPassVisivble ? 'text' : 'password'">
+          <span class="pass-eye" (click)="openPass()"><i class="fas "
+              [ngClass]="{'fa-eye-slash':!isPassVisivble,'fa-eye':isPassVisivble}"></i></span>
+        </div>
+
+        <div class="form-error" *ngIf="signUpForm.get('NewPassword')?.errors && signUpForm.get('NewPassword')?.dirty">
+          <ng-container *ngIf="signUpForm.get('NewPassword')?.hasError('required')">New Password is required</ng-container>
+          <ng-container *ngIf="signUpForm.get('NewPassword')?.hasError('minlength')">New Password must be at least 8
+            characters</ng-container>
+          <ng-container *ngIf="signUpForm.get('NewPassword')?.hasError('maxlength')">New Password must not exceed 20
+            characters</ng-container>
+        </div>
+
+        <label class="singup-label">Confirm Password</label>
+        <div class="form-pass">
+          <input class="form-group" formControlName="ConPassword" [type]="isPassVisivble ? 'text' : 'password'">
+          <span class="pass-eye" (click)="openPass()"><i class="fas "
+              [ngClass]="{'fa-eye-slash':!isPassVisivble,'fa-eye':isPassVisivble}"></i></span>
+        </div>
+
+        <div class="form-error" *ngIf="signUpForm.get('ConPassword')?.errors && signUpForm.get('ConPassword')?.dirty">
+          <ng-container *ngIf="signUpForm.get('ConPassword')?.hasError('required')">Confirm Password is required</ng-container>
+          <ng-container *ngIf="signUpForm.get('ConPassword')?.hasError('minlength')">Confirm Password must be at least 8
+            characters</ng-container>
+          <ng-container *ngIf="signUpForm.get('ConPassword')?.hasError('maxlength')">Confirm Password must not exceed 20
+            characters</ng-container>
+        </div>
+
+        <div class="form-error" *ngIf="signUpForm.errors?.passwordMismatch">
+            Passwords do not match.
+        </div>
+
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
+            <a class="form-group" (click)="switchMode(mode)" *ngIf="mode">Back to login</a>
+            <!-- <br> -->
+            <!-- <a class="form-group" (click)="switchMode()" *ngIF="mode">Forgot Password ?</a> -->
+        </form>
+    </div>
+</div>

@@ -8,22 +8,28 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link"routerLink="/users">Users</a>
+          
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" aria-current="page" routerLink="/crops">Crops</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login/Logout</a>
-        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link"routerLink="/users">Users</a>
+        </li> -->
         <!-- <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
+        <li class="nav-item">
+          <!-- <i class="pi pi-user" style="color: #708090"></i> -->
+          <a class="nav-link" (click)="checklogout()" href="#">Logout</a>
+          <!-- <i class="pi pi-user" style="font-size: 2.5rem," (click)="checklogout()"></i> -->
+        </li>
       </ul>
-      <form class="d-flex" role="search">
+      <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </nav>

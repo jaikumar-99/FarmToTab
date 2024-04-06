@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the form to the right */
+    height: 100vh; /* Full screen height */
+}
+
+.signup-form {
+    width: 300px; /* Width of the form */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow around the form */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    color: white;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+:host {
+    display: block;
+    height: 100vh; /* Full height of the viewport */
+    background-image: url('/assets/images/farmtotable.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /*  FORMS */
+.form-group {
+    border-radius: 20px;
+    padding: 5px;
+    width: 75%;
+    background-color: black;
+    color: wheat;
+    margin-bottom: 10px;
+  }
+  
+  .form-error {
+    color: #f67474;
+    text-align: left;
+    font-size: 15px;
+    margin-left: 12%;
+    margin-top: -10px;
+  }
+  
+  .form-pass {
+    position: relative;
+  }
+  
+  .pass-eye {
+    position: absolute;
+    right: 15%;
+    top: 15%;
+    cursor: pointer;
+    color: wheat;
+  }
+  
+  .login-border {
+    margin-top: 100px;
+    margin-bottom: 10px;
+    border-color: rgb(139, 147, 139);
+    border-radius: 25px;
+    border-width: 2px;
+  }
+  
+  .signup-head {
+    color: wheat;
+  }
+  
+  .singup-label {
+    color: whitesmoke;
+    display: block;
+    margin-left: 5px;
+  }
