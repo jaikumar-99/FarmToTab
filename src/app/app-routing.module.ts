@@ -8,11 +8,11 @@ import { UsersComponent } from './users/users.component';
 
 
 const routes: Routes = [
-  { path: '', component: AuthComponent },
+  // { path: '', component: AuthComponent },
   // { path: 'login', component: AppComponent },
+  { path: 'login', component: AuthComponent},
   { path: 'crops', component: CropItemsComponent },
   { path: 'add-crop', component: NewCropComponent },
-  { path: 'login', component: AuthComponent},
   { path: 'users', component: UsersComponent},
   { path: '', redirectTo:'login', pathMatch: 'full'},
   { path: '**', redirectTo:'login'}

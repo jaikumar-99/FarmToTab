@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableModule } from 'primeng/table';
+// import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-users',
@@ -12,16 +12,16 @@ export class UsersComponent {
 
   selectedCustomers: any = [];
 
-  representatives:any;
+  representatives: any;
 
-  statuses:any;
+  statuses: any;
 
-  loading:boolean = true;
+  loading: boolean = true;
 
   activityValues: number[] = [0, 100];
   constructor() { }
   ngOnInit() {
-    this.users = [{name:'Abhi', State:'Karnataka', utype: 'Farmer', status: 'Active'}, {name:'Jai',State: 'Andhra Pradesh', utype: 'Farmer', status: 'Active'}, {name:'Abhishek',state: 'Andhra Pradesh', utype: 'Consumer', status: 'Inactive'}];
+    this.users = [{ name: 'Abhi', State: 'Karnataka', utype: 'Farmer', status: 'Active' }, { name: 'Jai', State: 'Andhra Pradesh', utype: 'Farmer', status: 'Active' }, { name: 'Abhishek', state: 'Andhra Pradesh', utype: 'Consumer', status: 'Inactive' }];
   }
 
 }
