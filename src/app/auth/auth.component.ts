@@ -98,8 +98,9 @@ export class AuthComponent {
 
         if (response?.success) {
           // sessionStorage.setItem('login', 'true')
-          sessionStorage.setItem('access_token', response.access_token);
-          sessionStorage.setItem('email', response.email);
+          sessionStorage.setItem('access_token', response.accessToken);
+          sessionStorage.setItem('email', response.data.email);
+          sessionStorage.setItem('role', response.data.role);
 
           this.signUpForm.reset();
           this.LoginForm.reset();
@@ -134,8 +135,9 @@ export class AuthComponent {
 
         if (response?.success) {
           // sessionStorage.setItem('login', 'true')
-          sessionStorage.setItem('access_token', response.access_token);
+          sessionStorage.setItem('access_token', response.accessToken);
           sessionStorage.setItem('email', response.data.email);
+          sessionStorage.setItem('role', response.data.role);
 
           this.signUpForm.reset();
           this.LoginForm.reset();

@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     }
  //
-    sessionStorage.clear();
+    // sessionStorage.clear();
     // this.router.navigate(['/login']);
     this.authSubscription = this.appservice.currentVariable.subscribe(value => {
       console.log(value, 'variableValue');

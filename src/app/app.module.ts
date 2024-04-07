@@ -10,7 +10,7 @@ import { CropItemsComponent } from './crop-items/crop-items.component';
 import { NewCropComponent } from './new-crop/new-crop.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './users/users.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TableModule } from 'primeng/table';
@@ -108,6 +108,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ProductsItemsComponent } from './products-items/products-items.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 // import { TabViewModule } from 'primeng/tabview';
 // import { TagModule } from 'primeng/tag';
@@ -238,7 +239,7 @@ import { ProductsItemsComponent } from './products-items/products-items.componen
     RippleModule,
     StyleClassModule,
   ],
-  providers: [],
+  providers: [{ useClass: AuthInterceptor, multi: true, provide: HTTP_INTERCEPTORS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

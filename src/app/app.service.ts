@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppSettingsService } from './app-settings.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,24 @@ export class AppService {
 
   // loginstatus:boolean = false;
 
-  constructor(public http: HttpClient, private appsettings: AppSettingsService) { }
+  // global accessing values
+  profileDetails: any = {};
+
+  constructor(public http: HttpClient, private appsettings: AppSettingsService, private router: Router) {
+    if (sessionStorage.getItem('access_token')) {
+      this.getLoggedInUserDetails({}).subscribe({
+        next: (response: any) => {
+          if (response && response.success) {
+            this.profileDetails = response.data;
+            sessionStorage.setItem('email', response.data.email);
+            sessionStorage.setItem('role', response.data.role);
+            this.changeVariable(true);
+            this.router.navigate(['/users']);
+          }
+        }
+      });
+    }
+  }
 
 
   getuserslist() {
@@ -58,6 +76,11 @@ export class AppService {
   deleteUser(data: any) {
     const url = this.appsettings.APIS.DELETE_USER
     return this.appsettings.requestServer(data, url);
+  }
+
+  getLoggedInUserDetails(data: any) {
+    const url = this.appsettings.APIS.GET_USER_DETAILS;
+    return this.appsettings.requestServer(data, url)
   }
 
   // AUTH CHECKING
