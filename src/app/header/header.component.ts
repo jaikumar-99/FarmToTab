@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // subscriptions
   authSubscription: Subscription
+  profileSubscription: Subscription
 
   // profile
   profileDetails: any = {};
@@ -20,6 +21,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authSubscription = this.appservice.currentVariable.subscribe(value => {
       if (value) {
+        this.profileDetails = this.appservice.profileDetails;
+      }
+    });
+
+    this.profileSubscription = this.appservice.profileDetailsSubject.subscribe((value: any) => {
+      if (value.email) {
         this.profileDetails = this.appservice.profileDetails;
       }
     });
@@ -33,5 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
+    this.profileSubscription.unsubscribe();
   }
 }

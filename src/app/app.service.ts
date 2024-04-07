@@ -15,6 +15,8 @@ export class AppService {
 
   // global accessing values
   profileDetails: any = {};
+  profileDetailsSubject = new BehaviorSubject({});
+
 
   constructor(public http: HttpClient, private appsettings: AppSettingsService, private router: Router) {
     if (sessionStorage.getItem('access_token')) {
@@ -22,6 +24,8 @@ export class AppService {
         next: (response: any) => {
           if (response && response.success) {
             this.profileDetails = response.data;
+            this.profileDetailsSubject.next(this.profileDetails);
+
             sessionStorage.setItem('email', response.data.email);
             sessionStorage.setItem('role', response.data.role);
             this.changeVariable(true);
@@ -85,6 +89,12 @@ export class AppService {
 
   getLoggedInUserDetails(data: any) {
     const url = this.appsettings.APIS.GET_USER_DETAILS;
+    return this.appsettings.requestServer(data, url)
+  }
+
+  // udpate user profile
+  updateProfile(data: any) {
+    const url = this.appsettings.APIS.UPDATE_PROFILE_DETAILS;
     return this.appsettings.requestServer(data, url)
   }
 

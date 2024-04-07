@@ -26,7 +26,18 @@ body {
 }
 .btn:hover {
   border-radius: 10px;
-  background-color: #8cf1bf;
+  background-color: #03522a;
+}
+
+.btn-cancel{
+  background-color: rgb(192, 61, 61);
+  color: white;
+  border-radius: 10px;
+}
+.btn-approve{
+  background-color: rgb(72, 143, 224);
+  color: white;
+  border-radius: 10px;
 }
 
 //profile classes
@@ -37,6 +48,25 @@ body {
 .profile-tail {
     margin-left: 25px;
     font-size: 20px;
+}
+
+.profile-edit{
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 20px;
+  // color: #96ddeb;
+  padding: 5px;
+  // background-color: black;
+  // border-radius: 5px;
+}
+
+// input texts
+.prof-inp{
+  margin-left: 25px;
+  margin-bottom: 5px;
+}
+.margin-min{
+  margin-left: 25px;
 }
 
 :host ::ng-deep {

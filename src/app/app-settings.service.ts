@@ -22,6 +22,7 @@ export class AppSettingsService {
     CREATE_CROP: this.apiUrl + '/addcrop',
     DELETE_CROP: this.apiUrl + '/deletecrop',
     GET_USER_DETAILS: this.apiUrl + '/user/details',
+    UPDATE_PROFILE_DETAILS: this.apiUrl + '/user/profile_update',
   }
 
   requestServer(body: any, url: string) {
