@@ -105,6 +105,9 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ProductsItemsComponent } from './products-items/products-items.component';
 
 // import { TabViewModule } from 'primeng/tabview';
 // import { TagModule } from 'primeng/tag';
@@ -119,6 +122,9 @@ import { StyleClassModule } from 'primeng/styleclass';
     NewCropComponent,
     AuthComponent,
     UsersComponent,
+    OrderHistoryComponent,
+    UserProfileComponent,
+    ProductsItemsComponent,
   ],
   imports: [
     BrowserModule,
