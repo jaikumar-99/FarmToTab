@@ -7,19 +7,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link"routerLink="/users">Users</a>
-          
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/crops">Crops</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link"routerLink="/users">Users</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li> -->
+
+        <ng-container *ngIf="profileDetails?.role === 3">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/crops">Crops</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link"routerLink="/users">Users</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ng-container>
+
+        <!--- USER ROLE -->
+        <ng-container *ngIf="profileDetails?.role === 1">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/user-profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/orders">Order History</a>
+          </li>
+        </ng-container>
+
         <li class="nav-item">
           <!-- <i class="pi pi-user" style="color: #708090"></i> -->
           <a class="nav-link" (click)="checklogout()" href="#">Logout</a>

@@ -25,7 +25,12 @@ export class AppService {
             sessionStorage.setItem('email', response.data.email);
             sessionStorage.setItem('role', response.data.role);
             this.changeVariable(true);
-            this.router.navigate(['/users']);
+
+            if (response.data.role === 1) {
+              this.router.navigate(['/user-profile']);
+            } else if (response.data.role === 3) {
+              this.router.navigate(['/users']);
+            }
           }
         }
       });
