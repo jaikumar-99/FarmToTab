@@ -109,6 +109,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ProductsItemsComponent } from './products-items/products-items.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { MessageService } from 'primeng/api';
 
 // import { TabViewModule } from 'primeng/tabview';
 // import { TagModule } from 'primeng/tag';
@@ -239,7 +240,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     RippleModule,
     StyleClassModule,
   ],
-  providers: [{ useClass: AuthInterceptor, multi: true, provide: HTTP_INTERCEPTORS }],
+  providers: [{ useClass: AuthInterceptor, multi: true, provide: HTTP_INTERCEPTORS },MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
