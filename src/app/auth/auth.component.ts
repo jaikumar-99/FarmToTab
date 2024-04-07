@@ -22,12 +22,12 @@ export class AuthComponent {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // loginstatus = false;
   // passwordMatchValidator: any;
-    
+
   constructor(
     private formbuilder: FormBuilder,
     public router: Router,
     private appservice: AppService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.LoginForm = this.formbuilder.group({
@@ -63,27 +63,96 @@ export class AuthComponent {
       validator: this.passwordMatchValidator
     });
 
-    
+
     // this.activatedRoute.queryParams.subscribe(params => {
     //   this.mode = params['mode'];
     // });
   }
 
   passwordMatchValidator(frm: FormGroup) {
-    return frm.controls['NewPassword'].value === frm.controls['ConPassword'].value 
-           ? null : {'passwordMismatch': true};
+    return frm.controls['NewPassword'].value === frm.controls['ConPassword'].value
+      ? null : { 'passwordMismatch': true };
   }
-  
 
   onSubmit() {
-    console.log("Sign Up Form Submitted");
-    sessionStorage.setItem('login','true')
-    this.signUpForm.reset();
-    this.LoginForm.reset();
-    this.checkstatus();
-    // console.log(this.appservice.loginstatus);
-    this.router.navigate(['/users']);
+    if (!this.mode) {
+      this.onLogin();
+    } else {
+      this.onSignUp();
+    }
   }
+
+  onLogin() {
+    if (this.LoginForm.invalid) {
+      return false;
+    }
+
+    const payload = {
+      username: this.LoginForm.value.email,
+      password: this.LoginForm.value.password
+    };
+
+    this.appservice.loginUser(payload).subscribe({
+      next: (response: any) => {
+        console.log('Login Response', response);
+
+        if (response?.success) {
+          // sessionStorage.setItem('login', 'true')
+          sessionStorage.setItem('access_token', response.access_token);
+          sessionStorage.setItem('email', response.email);
+
+          this.signUpForm.reset();
+          this.LoginForm.reset();
+          this.appservice.changeVariable(true);
+          // this.checkstatus();
+          this.router.navigate(['/users']);
+          console.log("Login Submitted");
+        } else {
+          console.log('Login Error');
+        }
+      }, error: (error: any) => {
+        console.log('Error', error);
+      }
+    })
+    // console.log(this.appservice.loginstatus);
+  }
+
+  onSignUp() {
+    if (this.signUpForm.invalid) {
+      return false;
+    }
+
+    const payload = {
+      username: this.signUpForm.value.email,
+      password: this.signUpForm.value.NewPassword,
+      confpassword: this.signUpForm.value.ConPassword
+    };
+
+    this.appservice.singUpUser(payload).subscribe({
+      next: (response: any) => {
+        console.log('Singup Response', response);
+
+        if (response?.success) {
+          // sessionStorage.setItem('login', 'true')
+          sessionStorage.setItem('access_token', response.access_token);
+          sessionStorage.setItem('email', response.data.email);
+
+          this.signUpForm.reset();
+          this.LoginForm.reset();
+          this.appservice.changeVariable(true);
+          // this.checkstatus();
+          this.router.navigate(['/users']);
+          console.log("Sign Up Form Submitted");
+        } else {
+          console.log('Login Error');
+        }
+      }, error: (error: any) => {
+        console.log('Error', error);
+      }
+    })
+    // console.log(this.appservice.loginstatus);
+  }
+
 
   checkstatus() {
     if (sessionStorage.getItem('login') == 'true') {
@@ -96,7 +165,7 @@ export class AuthComponent {
   }
   switchMode() {
     this.mode = !this.mode;
-    sessionStorage.setItem('login','false')
+    // sessionStorage.setItem('login', 'false')
   }
 
   spaceValidation(event: any) {

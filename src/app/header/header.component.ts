@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private appservice: AppService,public router: Router) {}
+  constructor(private appservice: AppService, public router: Router) { }
   checklogout() {
-    sessionStorage.removeItem('login');
     this.appservice.changeVariable(false);
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 
