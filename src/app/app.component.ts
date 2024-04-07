@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { environment } from '../environments/environemnt';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +10,29 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.css'
 })
 
-export class AppComponent implements OnInit{
-  constructor(private appservice: AppService,private router: Router) {}
+export class AppComponent implements OnInit, OnDestroy {
+  constructor(private appservice: AppService, private router: Router) { }
   title = 'FarmToTable';
   showheader: boolean = false;
   variableValue: boolean = false;
+
+  // subscriptions
+  authSubscription: Subscription
+
   ngOnInit() {
+
+    // disabling the console.logs!
+    if (environment.production) {
+      console.log = () => {
+      }
+    }
+
     sessionStorage.clear();
-    this.router.navigate(['/login']);
-    this.appservice.currentVariable.subscribe(value => {
+    // this.router.navigate(['/login']);
+    this.authSubscription = this.appservice.currentVariable.subscribe(value => {
       console.log(value, 'variableValue');
       this.variableValue = value;
+      this.checklogin(value);
     });
   }
 
@@ -29,6 +43,10 @@ export class AppComponent implements OnInit{
     } else {
       this.showheader = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
   }
 }
 

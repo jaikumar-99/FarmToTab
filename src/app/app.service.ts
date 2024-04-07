@@ -60,4 +60,13 @@ export class AppService {
     return this.appsettings.requestServer(data, url);
   }
 
+  // AUTH CHECKING
+  get checkAuthStatus() {
+    if (this.loginstatus.value) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

@@ -6,7 +6,7 @@ import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'    
+  styleUrl: './users.component.scss'
 })
 export class UsersComponent {
   customers: any;
@@ -34,10 +34,10 @@ export class UsersComponent {
     this.searchdata = null;
   }
 
-checkclear(event: any, dt: any) {
-  this.searchdata = event;
-  console.log(event,dt);
-}
+  checkclear(event: any, dt: any) {
+    this.searchdata = event;
+    console.log(event, dt);
+  }
 
 
 
