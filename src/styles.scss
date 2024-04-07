@@ -29,6 +29,16 @@ body {
   background-color: #8cf1bf;
 }
 
+//profile classes
+.profile-head {
+  font-weight: 700;
+  min-width: 100px;
+}
+.profile-tail {
+    margin-left: 25px;
+    font-size: 20px;
+}
+
 :host ::ng-deep {
     .p-paginator {
         .p-paginator-current {

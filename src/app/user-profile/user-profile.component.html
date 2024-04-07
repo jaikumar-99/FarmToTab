@@ -1,1 +1,89 @@
-<p>user-profile works!</p>
+<div class="card grid grid-nogutter">
+  <div class="col-12 md:col-4">
+    <p-avatar [label]="profileDetails?.email[0].toUpperCase()" styleClass="mr-2" size="xlarge" shape="circle"
+      [style]="{ 'background-color': 'rgb(0 0 0)', color: '#ffffff' }"></p-avatar>
+    <br>
+    <br>
+    <h5>{{profileDetails?.email | titlecase}}</h5>
+  </div>
+
+  <br>
+
+  <ng-container *ngIf="false">
+    <div class="col-12 md:col-6">
+      <div class="card">
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Email</p>
+          <p class="profile-tail">{{profileDetails?.email}}</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Check</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div class="col-12 md:col-6">
+      <div class="card">
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Email</p>
+          <p class="profile-tail">{{profileDetails?.email}}</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Check</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+        <div class="flex">
+          <p class="profile-head">Profile Name</p>
+          <p class="profile-tail">Peter Parker</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
