@@ -1,1 +1,235 @@
-<p>crop-items works!</p>
+
+<div class="button-container" *ngIf="!editingEnabled && !formVisible">
+    <p-button class="justify-content-right" (click)="toggleForm()" label="Add Crops"></p-button>
+</div>
+
+<div class="card" *ngIf="!formVisible">
+    <!-- <button (click)="toggleForm()">Toggle Form</button> -->
+    <p-table
+        #dt1
+        [value]="crops"
+        dataKey="id"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['croptype', 'cropname', 'cropcode']"
+        >
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="searchdata" (input)="dt1.filterGlobal($event.target.value, 'contains');checkclear($event.target.value,dt1);" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="min-width:1rem">
+                    <div class="flex align-items-center">
+                        Crop Type
+                        <p-columnFilter type="text" field="croptype" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width:1rem">
+                    <div class="flex align-items-center">
+                    Crop Name
+                    </div>
+                </th>
+                <th style="min-width:1rem">
+                    <div class="flex align-items-center">
+                    Crop Code
+                    </div>
+                </th>
+                <!-- <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Role
+                        <p-columnFilter type="text" field="state" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        User Type
+                        <p-columnFilter type="text" field="utype" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Status
+                        <p-columnFilter type="text" field="Status" display="menu"></p-columnFilter>
+                    </div>
+                </th> -->
+                <!-- <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Agent
+                        <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="header">
+                                <div class="px-3 pt-3 pb-0">
+                                    <span class="font-bold">Agent Picker</span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                                    <ng-template let-option pTemplate="item">
+                                        <div class="inline-block vertical-align-middle">
+                                            <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
+                                            <span class="ml-1 mt-1">{{ option.name }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiSelect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Date
+                        <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                    </div>
+                </th> -->
+                <!-- <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Balance
+                        <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+                    </div>
+                </th> -->
+                <!-- <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Status
+                        <p-columnFilter field="status" matchMode="equals" display="menu">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Activity
+                        <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="filter" let-filter="filterCallback">
+                                <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="m-3"></p-slider>
+                                <div class="flex align-items-center px-2">
+                                    <span>{{ activityValues[0] }}</span>
+                                    <span>{{ activityValues[1] }}</span>
+                                </div>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="width: 3rem">
+                    <div class="flex align-items-center">
+                        Verified
+                        <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                    </div>
+                </th> -->
+                <th style="min-width:1rem">
+                    Action
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-crop>
+            <tr>
+                <td>
+                    {{ crop.croptype }}
+                </td>
+                <!-- <td>
+                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />
+                    <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
+                </td>
+                <td>
+                    <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
+                    <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
+                </td>
+                <td>
+                    {{ customer.date | date: 'MM/dd/yyyy' }}
+                </td> -->
+                <td>
+                    {{ crop.cropname }}
+                </td>
+                <td>
+                    {{ crop.cropcode }}
+                </td>
+                <td>
+                    <div class="flex flex-wrap gap-3">
+                        <p-button label="Update" [rounded]="true" severity="info" (click)="onUpdate(crop)"></p-button>
+                    <p-button label="Delete" [rounded]="true" (click)="onDelete(crop)" severity="danger"></p-button>
+                </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7">No Users found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<!-- <div *ngIf="formVisible">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <label for="field1">Field 1:</label>
+      <input type="text" id="field1" formControlName="field1">
+  
+      <label for="field2">Field 2:</label>
+      <input type="text" id="field2" formControlName="field2">
+  
+      <button type="submit">Submit</button>
+    </form>
+</div> -->
+
+
+<ng-container *ngIf="formVisible">
+    <form [formGroup]="myForm">
+      <div class="col-6 md:col-5">
+        <div class="card">
+          <div class="flex">
+            <p class="profile-head">Crop Type</p>
+            <input type="text" placeholder="crop type" class="p-inputtext-sm prof-inp" pInputText formControlName="croptype">
+        </div>
+          <div class="form-error" *ngIf="myForm.get('croptype')?.errors && myForm.get('croptype')?.dirty">
+            <ng-container *ngIf="myForm.get('croptype')?.hasError('required')">Crop Type is required</ng-container>
+            <ng-container *ngIf="myForm.get('croptype')?.hasError('minlength')">Crop Type must be at least 8
+                characters</ng-container>
+              <ng-container *ngIf="myForm.get('croptype')?.hasError('maxlength')">Crop Type must not exceed 20
+                characters</ng-container>
+          </div>
+        
+          <div class="flex">
+            <p class="profile-head">Crop Name</p>
+            <input type="text" placeholder="crop name" class="p-inputtext-sm prof-inp" pInputText formControlName="cropname">
+        </div>
+          <div class="form-error" *ngIf="myForm.get('cropname')?.errors && myForm.get('cropname')?.dirty">
+          <ng-container *ngIf="myForm.get('cropname')?.hasError('required')">Crop Name is required</ng-container>
+            <ng-container *ngIf="myForm.get('cropname')?.hasError('minlength')">Crop Name must be at least 8
+                characters</ng-container>
+              <ng-container *ngIf="myForm.get('cropname')?.hasError('maxlength')">Crop Name must not exceed 20
+                characters</ng-container>
+          </div>
+          <div class="flex" *ngIf="!editingEnabled">
+            <p class="profile-head">Crop Code</p>
+            <input type="text" *ngIf="!editingEnabled" placeholder="crop code" class="p-inputtext-sm prof-inp" pInputText formControlName="cropcode">
+        </div>
+          <div class="form-error" *ngIf="myForm.get('cropcode')?.errors && myForm.get('cropcode')?.dirty">
+          <ng-container *ngIf="myForm.get('cropcode')?.hasError('required')">Crop Code is required</ng-container>
+            <ng-container *ngIf="myForm.get('cropcode')?.hasError('minlength')">Crop Code must be at least 8
+                characters</ng-container>
+              <ng-container *ngIf="myForm.get('cropcode')?.hasError('maxlength')">Crop Code must not exceed 20
+                characters</ng-container>
+          </div>
+          <div class="footer flex">
+            <button class="btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="margin-min btn-approve"*ngIf="!editingEnabled" [disabled]="myForm.pristine || myForm.invalid" (click)="onSubmit()">Submit</button>
+            <button class="margin-min btn-approve" *ngIf="editingEnabled"[disabled]="myForm.invalid" (click)="onupdateclick()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>

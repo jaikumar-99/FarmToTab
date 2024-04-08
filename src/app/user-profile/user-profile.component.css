@@ -1,0 +1,11 @@
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.form-error {
+    color: #f67474;
+    text-align: left;
+    font-size: 15px;
+    margin-left: 12%;
+    margin-top: -10px;
+  }

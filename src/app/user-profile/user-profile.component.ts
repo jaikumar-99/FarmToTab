@@ -33,12 +33,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
 
     this.updateForm = this.formBuilder.group({
-      profilename: [null, [Validators.required]],
-      mobile: [null, [Validators.required]],
-      pincode: [null, [Validators.required]],
-      landmark: [null, [Validators.required]],
-      state: [null, [Validators.required]],
-      country: [null, [Validators.required]],
+      profilename: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(20)]],
+      mobile: [null, [Validators.required,Validators.pattern('^\\+?[1-9]\\d{1,14}$')]],
+      pincode: [null, [Validators.required,Validators.minLength(6), Validators.maxLength(6)]],
+      landmark: [null, [Validators.required,Validators.minLength(8), Validators.maxLength(20)]],
+      state: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(15)]],
+      country: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(15)]],
       totalland: [null, [Validators.required]],
     })
 

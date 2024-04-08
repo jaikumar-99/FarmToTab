@@ -161,7 +161,7 @@
                     {{ user.status }}
                 </td>
                 <td>
-                    <p-button label="Delete" icon="pi pi-trash" (click)="onDelete(user)" severity="danger"></p-button>
+                    <p-button label="Delete" [pStyleClass]="p-button-rounded" icon="pi pi-trash" (click)="onDelete(user)" severity="danger"></p-button>
                 </td>
             </tr>
         </ng-template>

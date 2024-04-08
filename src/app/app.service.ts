@@ -58,11 +58,16 @@ export class AppService {
 
   createCrop(data: any) {
     const url = this.appsettings.APIS.CREATE_CROP;
-    return this.appsettings.requestServer({}, url);
+    return this.appsettings.requestServer(data, url);
   }
 
   deleteCrop(data: any) {
     const url = this.appsettings.APIS.DELETE_CROP;
+    return this.appsettings.requestServer(data, url);
+  }
+
+  updateCrop(data: any) {
+    const url = this.appsettings.APIS.UPDATE_CROP;
     return this.appsettings.requestServer(data, url);
   }
 
