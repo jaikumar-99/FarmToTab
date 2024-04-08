@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { environment } from '../environments/environemnt';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +20,14 @@ export class AppComponent implements OnInit, OnDestroy {
   authSubscription: Subscription
 
   ngOnInit() {
+    // console.log(environment.apiUrl, environment.production);
 
     // disabling the console.logs!
     if (environment.production) {
       console.log = () => {
       }
     }
- //
+    //
     // sessionStorage.clear();
     // this.router.navigate(['/login']);
     this.authSubscription = this.appservice.currentVariable.subscribe(value => {
