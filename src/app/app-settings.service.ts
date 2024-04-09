@@ -24,6 +24,11 @@ export class AppSettingsService {
     UPDATE_CROP: this.apiUrl + '/updatecrop',
     GET_USER_DETAILS: this.apiUrl + '/user/details',
     UPDATE_PROFILE_DETAILS: this.apiUrl + '/user/profile_update',
+    ADD_PRODUCTS: this.apiUrl + '/user/addproducts',
+    UPDATE_PRODUCTS: this.apiUrl + '/user/Updateproducts',
+    FETCH_PRODUCTS: this.apiUrl + '/user/fetchProducts',
+    ADD_ORDER: this.apiUrl + '/user/addorder',
+    FETCH_ORDER: this.apiUrl + '/user/fetchorder',
   }
 
   requestServer(body: any, url: string) {

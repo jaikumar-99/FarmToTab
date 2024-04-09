@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crop-items',
@@ -17,7 +18,7 @@ export class CropItemsComponent {
   searchdata: any = null;
   editingEnabled: boolean = false;
   updateId: string = null;
-  constructor(private appservice: AppService, private FormBuilder: FormBuilder) { }
+  constructor(private appservice: AppService, private FormBuilder: FormBuilder,public messageService: MessageService) { }
   
 
   ngOnInit(){ 
@@ -118,6 +119,7 @@ export class CropItemsComponent {
           this.formVisible = false;
           this.editingEnabled = false;
         } else {
+          this.messageService.add({ severity:'error', summary: 'Error', detail: 'Failed Deleting Crop!!!' });
           console.log('Unable to update!');
         }
       }, error: (error: any) => {
@@ -146,6 +148,7 @@ export class CropItemsComponent {
           this.formVisible = false;
           this.editingEnabled = false;
         } else {
+          this.messageService.add({ severity:'error', summary: 'Error', detail: 'Failed Updating crop!!!' });
           console.log('Unable to update!');
         }
       }, error: (error: any) => {

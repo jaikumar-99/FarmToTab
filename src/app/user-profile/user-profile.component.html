@@ -8,17 +8,17 @@
       <h5>{{profileDetails?.email | titlecase}}</h5>
       <p (click)="onEditProfile()">
         <!-- <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i> -->
-        <i class="pi pi-pencil profile-edit"></i>
+        <i class="pi pi-pencil profile-edit" *ngIf="!editingEnabled && !addProducts"></i>
       </p>
     </span>
   </div>
 
-  <div class="button-container" *ngIf="!editingEnabled">
-    <p-button class="justify-content-right" label="Add Products"></p-button>
+  <div class="button-container" *ngIf="!editingEnabled && !addProducts">
+    <p-button class="justify-content-right" label="Add Products" (click)="onadd()"></p-button>
 </div>
 
 
-  <ng-container *ngIf="!editingEnabled">
+  <ng-container *ngIf="!editingEnabled && !addProducts">
     <div class="col-12 md:col-6">
       <div class="card">
         <div class="flex">
@@ -57,7 +57,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="editingEnabled">
+  <ng-container *ngIf="editingEnabled && !addProducts">
     <form [formGroup]="updateForm">
       <div class="col-12 md:col-6">
         <div class="card">
@@ -157,6 +157,53 @@
           <div class="footer flex">
             <button class="btn-cancel" (click)="onCancel()">Cancel</button>
             <button class="margin-min btn-approve" (click)="onUpdate()">Update</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+
+
+  <ng-container *ngIf="addProducts">
+    <form [formGroup]="AddProducts">
+      <div class="col-6">
+        <div class="card">
+          <div class="flex">
+            <p class="profile-head justify-content-center">Product Name</p>
+            <p-dropdown formControlName="productname" [options]="crops" [(ngModel)]="selectedCrop" optionLabel="cropname" [showClear]="true" placeholder="Select a crop"></p-dropdown>
+        </div>
+          <div class="form-error" *ngIf="AddProducts.get('productname')?.errors && AddProducts.get('productname')?.dirty">
+            <ng-container *ngIf="AddProducts.get('productname')?.hasError('required')">Product Name is required</ng-container>
+          </div>
+        
+          <div class="flex">
+            <p class="profile-head">Description</p>
+            <textarea rows="5" cols="30" pInputTextarea placeholder="description" formControlName="description"></textarea>
+        </div>
+          <div class="form-error" *ngIf="AddProducts.get('description')?.errors && AddProducts.get('description')?.dirty">
+          <ng-container *ngIf="AddProducts.get('description')?.hasError('required')">Description is required</ng-container>
+            <ng-container *ngIf="AddProducts.get('description')?.hasError('minlength')">Description must be at least 8
+                characters</ng-container>
+              <ng-container *ngIf="AddProducts.get('description')?.hasError('maxlength')">Description must not exceed 20
+                characters</ng-container>
+          </div>
+          <div class="flex">
+            <p class="profile-head">price</p>
+            <input type="number"  placeholder="price" class="p-inputtext-sm prof-inp" pInputText formControlName="price">
+        </div>
+          <div class="form-error" *ngIf="AddProducts.get('price')?.errors && AddProducts.get('price')?.dirty">
+          <ng-container *ngIf="AddProducts.get('price')?.hasError('required')">Price is required</ng-container>
+          </div>
+          <div class="flex">
+            <p class="profile-head">Quantity</p>
+            <input type="number"  placeholder="quantity in lbs" class="p-inputtext-sm prof-inp" pInputText formControlName="qty">
+        </div>
+          <div class="form-error" *ngIf="AddProducts.get('qty')?.errors && AddProducts.get('qty')?.dirty">
+          <ng-container *ngIf="AddProducts.get('qty')?.hasError('required')">Quantity is required</ng-container>
+          </div>
+          <div class="footer flex">
+            <button class="btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="margin-min btn-approve" [disabled]="AddProducts.pristine || AddProducts.invalid" (click)="onaddSubmit()">Submit</button>
           </div>
         </div>
       </div>

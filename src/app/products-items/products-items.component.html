@@ -1,12 +1,16 @@
-<div class="card">
+<div class="card" *ngIf="!viewcart">
   <p-dataView #dv [value]="products" [layout]="viewType" [sortField]="sortField" [sortOrder]="sortOrder">
     <ng-template pTemplate="header">
       <div class="flex flex-column md:flex-row md:justify-content-between">
         <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
           (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
       </div>
-
+      
+      <div class="flex justify-content-center">
+        <p-button *ngIf="cartlen > 0" label="View Cart" (click)="viewCart() "></p-button>
+      </div>
       <div class="flex justify-content-end">
+        <!-- <p-button *ngIf="cartlen > 0" label="View Cart"></p-button> -->
         <p-dataViewLayoutOptions [layout]="layout"></p-dataViewLayoutOptions>
       </div>
     </ng-template>
@@ -15,25 +19,30 @@
         <div class="col-12" *ngFor="let product of products; let first = first">
           <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4"
             [ngClass]="{ 'border-top-1 surface-border': !first }">
-            <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
-              [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" />
+            <!-- <img class="w-9 sm:w-16rem xl:w-5rem shadow-2 block xl:block mx-auto border-round"
+               [alt]="product.productname" /> -->
+               <!-- [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" -->
             <div
               class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
               <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                <div class="text-2xl font-bold text-900">{{ product.name }}</div>
-                <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <div class="text-2xl font-bold text-900">{{ product.productname }}</div>
+                <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
                 <div class="flex align-items-center gap-3">
                   <span class="flex align-items-center gap-2">
                     <i class="pi pi-tag"></i>
-                    <span class="font-semibold">{{ product.category }}</span>
+                    <span class="font-semibold">{{ product.producttype }}</span>
                   </span>
-                  <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>
+                  <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag> -->
                 </div>
               </div>
+              <div class="flex sm:flex-column align-items-center sm:align-items-center gap-3 sm:gap-2">
+                <span class="text-2xl font-semibold">{{ 'Qty   ' + product.qty + '  lbs' }}</span>
+                
+              </div>
               <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                <span class="text-2xl font-semibold">{{ '₹' + product.price }}</span>
+                <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
                 <button pButton icon="pi pi-shopping-cart" class="md:align-self-end mb-2 p-button-rounded"
-                  [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+                (click)="onaddcart(product)"></button>
               </div>
             </div>
           </div>
@@ -47,25 +56,46 @@
             <div class="flex flex-wrap align-items-center justify-content-between gap-2">
               <span class="flex align-items-center gap-2">
                 <i class="pi pi-tag"></i>
-                <span class="font-semibold">{{ product.category }}</span>
+                <span class="font-semibold">{{ product.producttype }}</span>
               </span>
-              <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>
+              <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>/ -->
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
-              <img class="w-9 shadow-2 border-round"
-                [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image"
-                [alt]="product.name" />
-              <div class="text-2xl font-bold">{{ product.name }}</div>
-              <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+              <!-- <img class="w-9 shadow-2 border-round"
+                [alt]="product.productname" /> -->
+                <!-- [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" -->
+              <div class="text-2xl font-bold">{{ product.productname }}</div>
+              <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
             </div>
             <div class="flex align-items-center justify-content-between">
-              <span class="text-2xl font-semibold">{{ '₹' + product.price }}</span>
-              <button pButton icon="pi pi-shopping-cart" class="p-button-rounded"
-                [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+              <span class="text-2xl font-semibold">{{ 'Qty' + product.qty }}</span>
+              <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
+              <button pButton icon="pi pi-shopping-cart" class="p-button-rounded" (click)="onaddcart(product)"></button>
             </div>
           </div>
         </div>
       </div>
     </ng-template>
   </p-dataView>
+</div>
+
+
+<div class="card xl:flex xl:justify-content-center" *ngIf="viewcart">
+  <button pButton class="md:align-self-end mb-2 p-button-rounded" (click)="onclickback()">Back</button>
+  <p-orderList [value]="cartitems" [listStyle]="{ height: '25rem' }" header="Products">
+      <ng-template let-product pTemplate="item">
+          <div class="flex flex-wrap p-2 align-items-center gap-3">
+              <div class="flex-1 flex flex-column gap-2">
+                  <span class="font-bold">{{ product.productname }}</span>
+                  <button pButton class="pi pi-trash md:align-self-end mb-2 p-button-rounded" (click)="onremoveitem(product)"></button>
+                  <div class="flex align-items-center gap-2">
+                      <i class="pi pi-tag text-sm"></i>
+                      <span>{{ product.producttype }}</span>
+                  </div>
+              </div>
+              <span class="font-bold text-900">{{ '$' + product.price }}</span>
+          </div>
+      </ng-template>
+  </p-orderList>
+  <button pButton class="md:align-self-end mb-2 p-button-rounded" (click)="placeOrder()">Order</button>
 </div>

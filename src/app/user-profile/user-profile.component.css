@@ -4,8 +4,30 @@
 }
 .form-error {
     color: #f67474;
-    text-align: left;
+    text-align: center;
     font-size: 15px;
     margin-left: 12%;
-    margin-top: -10px;
+    margin-top: 10px;
   }
+
+  .prof-inp {
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+.p-inputtext.ng-dirty.ng-invalid {
+    border-color: #e24c4c;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.p-inputtext {
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.profile-head {
+    font-weight: 700;
+    min-width: 150px;
+}

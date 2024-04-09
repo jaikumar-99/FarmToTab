@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-auth',
@@ -26,7 +27,8 @@ export class AuthComponent {
   constructor(
     private formbuilder: FormBuilder,
     public router: Router,
-    private appservice: AppService
+    private appservice: AppService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
@@ -108,8 +110,10 @@ export class AuthComponent {
           // this.checkstatus();
           this.router.navigate(['/users']);
           console.log("Login Submitted");
+          this.messageService.add({ severity:'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
         } else {
           console.log('Login Error');
+          this.messageService.add({ severity:'error', summary: 'Error', detail: `${response.message}` });
         }
       }, error: (error: any) => {
         console.log('Error', error);
@@ -145,8 +149,10 @@ export class AuthComponent {
           // this.checkstatus();
           this.router.navigate(['/users']);
           console.log("Sign Up Form Submitted");
+          this.messageService.add({ severity:'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
         } else {
           console.log('Login Error');
+          this.messageService.add({ severity:'error', summary: 'Error', detail: 'Signup Failed!!!' });
         }
       }, error: (error: any) => {
         console.log('Error', error);

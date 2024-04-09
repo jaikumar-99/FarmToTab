@@ -51,6 +51,7 @@ export class AppService {
     this.loginstatus.next(value);
   }
 
+  // crops
   getcropslist() {
     const url = this.appsettings.APIS.GET_CROPS;
     return this.appsettings.requestServer({}, url);
@@ -101,6 +102,29 @@ export class AppService {
   updateProfile(data: any) {
     const url = this.appsettings.APIS.UPDATE_PROFILE_DETAILS;
     return this.appsettings.requestServer(data, url)
+  }
+
+  //Create products
+  createProduct(data: any) {
+    const url = this.appsettings.APIS.ADD_PRODUCTS;
+    return this.appsettings.requestServer(data, url);
+  }
+  //fetch products
+  fetchproducts() {
+    const url = this.appsettings.APIS.FETCH_PRODUCTS;
+    return this.appsettings.requestServer({}, url);
+  }
+
+
+  //Create Order
+  placeorder(data: any) {
+    const url = this.appsettings.APIS.ADD_ORDER;
+    return this.appsettings.requestServer(data, url);
+  }
+  //fetch orders
+  fetchorders() {
+    const url = this.appsettings.APIS.FETCH_ORDER;
+    return this.appsettings.requestServer({}, url);
   }
 
   // AUTH CHECKING
