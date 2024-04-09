@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
   // console.log('AUTH CHECKING', appService.checkAuthStatus);
 
-  if (appService.checkAuthStatus) {
+  if (appService.checkAuthStatus || sessionStorage.getItem('access_token')) {
     return true;
   }
 

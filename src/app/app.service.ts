@@ -37,6 +37,7 @@ export class AppService {
           this.changeVariable(true);
 
           if (response.data.role === 1) {
+            // const url = this.router.url !== '/login' ? this.router.url : '/user-profile';
             this.router.navigate(['/user-profile']);
           } else if (response.data.role === 3) {
             this.router.navigate(['/users']);

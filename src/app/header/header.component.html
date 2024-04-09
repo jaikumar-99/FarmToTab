@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">FarmToTab</a>
+    <h3 class="navbar-brand cursor-pointer">FarmToTab</h3>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
       aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,13 +26,17 @@
         <!--- USER ROLE -->
         <ng-container *ngIf="profileDetails?.role === 1">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products">Products</a>
+            <a class="nav-link" [ngClass]="{'current-tab': currentUrl === '/products' }"
+              routerLink="/products">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" routerLink="/user-profile">Profile</a>
+            <a class="nav-link" aria-current="page" routerLink="/user-profile"
+              [ngClass]="{'current-tab': currentUrl === '/user-profile' }">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" routerLink="/orders">Order History</a>
+            <a class="nav-link" aria-current="page" routerLink="/orders"
+              [ngClass]="{'current-tab': currentUrl === '/orders' }">Order History</a>
+                      
           </li>
         </ng-container>
 

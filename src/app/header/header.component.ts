@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,12 +14,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // subscriptions
   authSubscription: Subscription
   profileSubscription: Subscription
+  urlSubscription: Subscription;
 
   // profile
   profileDetails: any = {};
 
+  // url details
+  currentUrl = ''
+
   ngOnInit(): void {
     this.profileDetails = this.appservice.profileDetails;
+    this.currentUrl = this.router.url;
+    console.log('activated route', this.router.url);
+
+    this.traceUrl();
 
     this.authSubscription = this.appservice.currentVariable.subscribe(value => {
       if (value) {
@@ -34,6 +42,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  traceUrl() {
+    this.urlSubscription = this.router.events.subscribe(event => {
+      // console.log('url event',url);
+      if (event instanceof NavigationEnd) {
+        // We've finished navigating
+        console.log('Final', event);
+        this.currentUrl = event.url;
+      }
+    });
+  }
   checklogout() {
     this.appservice.changeVariable(false);
     sessionStorage.clear();
@@ -43,5 +61,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
     this.profileSubscription.unsubscribe();
+    this.urlSubscription.unsubscribe();
   }
 }
