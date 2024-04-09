@@ -69,6 +69,23 @@ body {
   margin-left: 25px;
 }
 
+// buttons margins
+.margin-btn {
+  margin:5px
+}
+.cursor-pointer{
+  cursor: pointer;
+  text-decoration: none
+}
+.login-btn{
+  background-color: black;
+  color: white;
+  margin: 5px;
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+}
+
 :host ::ng-deep {
     .p-paginator {
         .p-paginator-current {

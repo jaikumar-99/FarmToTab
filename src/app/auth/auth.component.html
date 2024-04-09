@@ -9,7 +9,7 @@
           <ng-container *ngIf="LoginForm.get('email')?.hasError('required')">Email is required</ng-container>
           <ng-container *ngIf="LoginForm.get('email')?.hasError('email')">Please enter a valid email</ng-container>
         </div>
-            
+
             <label class="singup-label">Password</label>
         <div class="form-pass">
           <input class="form-group" formControlName="password" [type]="isPassVisivble ? 'text' : 'password'">
@@ -25,9 +25,9 @@
             characters</ng-container>
         </div>
 
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
-            <a class="form-group" (click)="switchMode()" *ngIf="!mode">New user Signup here ?</a>
-            <!-- <br> -->
+            <a class="form-group cursor-pointer" (click)="switchMode()" *ngIf="!mode">New user Signup here</a>
+            <br>
+            <button type="submit" class="login-btn" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
             <!-- <a class="form-group" (click)="switchMode()" *ngIF="mode">Forgot Password ?</a> -->
         </form>
 
@@ -39,7 +39,7 @@
           <ng-container *ngIf="signUpForm.get('email')?.hasError('required')">Email is required</ng-container>
           <ng-container *ngIf="signUpForm.get('email')?.hasError('email')">Please enter a valid email</ng-container>
         </div>
-            
+
             <label class="singup-label">New Password</label>
         <div class="form-pass">
           <input class="form-group" formControlName="NewPassword" [type]="isPassVisivble ? 'text' : 'password'">
@@ -74,8 +74,8 @@
             Passwords do not match.
         </div>
 
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
-            <a class="form-group" (click)="switchMode(mode)" *ngIf="mode">Back to login</a>
+            <button type="submit" class="login-btn" (click)="onSubmit()">{{ mode ? 'Signup' : 'Login'}}</button>
+            <a class="form-group cursor-pointer" (click)="switchMode(mode)" *ngIf="mode">Back to login</a>
             <!-- <br> -->
             <!-- <a class="form-group" (click)="switchMode()" *ngIF="mode">Forgot Password ?</a> -->
         </form>
