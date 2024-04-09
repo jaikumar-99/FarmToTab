@@ -1,11 +1,11 @@
 <div class="card grid grid-nogutter">
   <div class="col-12 md:col-4" *ngIf="profileDetails?.email">
-    <p-avatar [label]="profileDetails?.email[0].toUpperCase()" styleClass="mr-2" size="xlarge" shape="circle"
+    <p-avatar [label]="profileDetails?.profilename ? profileDetails?.profilename[0].toUpperCase() : profileDetails?.email[0].toUpperCase()" styleClass="mr-2" size="xlarge" shape="circle"
       [style]="{ 'background-color': 'rgb(0 0 0)', color: '#ffffff' }"></p-avatar>
     <br>
     <br>
     <span class="flex">
-      <h5>{{profileDetails?.email | titlecase}}</h5>
+      <h5>{{profileDetails?.profilename ? (profileDetails?.profilename | titlecase) : (profileDetails?.email | titlecase)}}</h5>
       <p (click)="onEditProfile()">
         <!-- <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i> -->
         <i class="pi pi-pencil profile-edit" *ngIf="!editingEnabled && !addProducts"></i>

@@ -157,7 +157,13 @@ export class AuthComponent {
           this.LoginForm.reset();
           this.appservice.changeVariable(true);
           // this.checkstatus();
-          this.router.navigate(['/users']);
+          // this.router.navigate(['/users']);
+
+          if (response.data.role === 1) {
+            this.router.navigate(['/user-profile']);
+          } else if (response.data.role === 3) {
+            this.router.navigate(['/users']);
+          }
           console.log("Sign Up Form Submitted");
           this.messageService.add({ severity: 'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
         } else {
