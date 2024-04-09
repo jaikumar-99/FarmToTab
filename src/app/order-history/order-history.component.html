@@ -49,6 +49,7 @@
                         <p-chip [label]="product.producttype" icon="pi pi-tag"></p-chip>
 
                       </span>
+                      <button class="btn-black" (click)="openOrderDetails(product)">View Order</button>
                       <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag> -->
                     </div>
                   </div>
@@ -102,7 +103,9 @@
                 <p-tag severity="success" [rounded]="true">
                   <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
                 </p-tag>
-                <span class="text-l font-semibold">Ordered on: {{ product.createdAt | date:'short' }}</span>
+                <button class="btn-black" (click)="openOrderDetails(product)">View Order</button>
+
+                <!-- <span class="text-l font-semibold">Ordered on: {{ product.createdAt | date:'short' }}</span> -->
 
                 <!-- <button label="View Order" class="btn">View Order</button> -->
                 <!-- <button pButton icon="pi pi-shopping-cart" class="p-button-rounded"
@@ -114,4 +117,70 @@
       </ng-template>
     </p-dataView>
   </ng-container>
+</div>
+
+
+<div class="card">
+  <p-dialog [visible]="orderItem.consumerId ? true : false">
+    <ng-template pTemplate="headless">
+      <div class="flex flex-column px-8 py-5 gap-4 modal-open">
+
+        <ng-container>
+          <div class="col-12 md:col-6">
+            <div class="card">
+              <div class="flex">
+                <p class="profile-head">Product Name</p>
+                <p class="profile-tail">{{orderItem?.productname ? orderItem?.productname : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Product Type</p>
+                <p class="profile-tail">{{orderItem?.producttype ? orderItem?.producttype : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Quantity</p>
+                <p class="profile-tail" style="text-wrap: nowrap">{{orderItem?.qty ? orderItem?.qty : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Price</p>
+                <p class="profile-tail">{{orderItem?.price ? orderItem?.price : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Ordered on</p>
+                <span class="profile-tail" style="text-wrap: nowrap">{{orderItem?.createdAt ? (orderItem?.createdAt |
+                  date:'short') : '&mdash;'}}
+                </span>
+              </div>
+
+              <div class="flex">
+                <p class="profile-head">State</p>
+                <p class="profile-tail">{{orderItem?.state ? orderItem?.state: '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Country</p>
+                <p class="profile-tail">{{orderItem?.country ? orderItem?.country: '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Pincode</p>
+                <p class="profile-tail">{{orderItem?.pincode ? orderItem?.pincode : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Land Mark</p>
+                <span class="profile-tail" style="text-wrap: nowrap">{{orderItem?.landmark ? orderItem?.landmark: '&mdash;'}}</span>
+              </div>
+
+              <div class="flex">
+                <p class="profile-head">Mobile Number</p>
+                <p class="profile-tail">{{orderItem?.mobile ? orderItem?.mobile: '&mdash;'}}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+
+        <div class="flex align-items-center gap-2">
+          <button (click)="closeOrderDetails()" [text]="true" class="btn-black w-full">Close</button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
 </div>

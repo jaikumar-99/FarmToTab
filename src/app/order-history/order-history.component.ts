@@ -20,6 +20,7 @@ export class OrderHistoryComponent implements OnInit {
 
   // shimmers
   enableShimmers = true;
+  orderItem: any = {};
 
 
   constructor(private appservice: AppService, private messageservice: MessageService) { }
@@ -81,4 +82,14 @@ export class OrderHistoryComponent implements OnInit {
         return null;
     }
   };
+
+  openOrderDetails(order: any) {
+    console.log('Order details', order);
+    this.orderItem = order;
+  }
+
+  closeOrderDetails() {
+    console.log('Closing the order details!')
+    this.orderItem = {};
+  }
 }

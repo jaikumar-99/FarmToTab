@@ -93,6 +93,12 @@ body {
   padding:5px
 }
 
+// modal classes
+.modal-open {
+  background-color: white;
+  border-radius: 10px;
+}
+
 :host ::ng-deep {
     .p-paginator {
         .p-paginator-current {
