@@ -20,7 +20,7 @@ export class ProductsItemsComponent implements OnInit {
   cartlen: number = 0;
 
   // products
-  products: any = []; 
+  products: any = [];
 
   cartitems: any = [];
   viewcart: boolean = false;
@@ -81,14 +81,14 @@ export class ProductsItemsComponent implements OnInit {
   //   { name: 'test', image: 'bracelet.jpg', rating: 5, category: 'category', inventoryStatus: 'INSTOCK', price: 45 },
   // ]
 
-  constructor(private appservice: AppService,  private messageservice: MessageService) {
+  constructor(private appservice: AppService, private messageservice: MessageService) {
 
   }
   ngOnInit(): void {
     this.profileDetails = this.appservice.profileDetails;
     this.profileSubscription = this.appservice.profileDetailsSubject.subscribe((value: any) => {
       if (value.email) {
-        this.profileDetails = this.appservice.profileDetails;
+        this.profileDetails = value;
       }
     });
     this.fetchProducts();
@@ -113,18 +113,18 @@ export class ProductsItemsComponent implements OnInit {
 
   onaddcart(item: any) {
     console.log(item);
-    let data = _.pluck(this.cartitems,'_id')
-    if(!_.contains(data,item._id)) {
+    let data = _.pluck(this.cartitems, '_id')
+    if (!_.contains(data, item._id)) {
       this.cartitems.push(item);
     } else {
       return
     }
     console.log(data, this.cartitems)
     this.messageservice.add({
-      severity:'success',
+      severity: 'success',
       summary: 'Success',
       detail: 'Item added to cart'
-    }); 
+    });
     this.cartlen = this.cartitems.length;
   }
 
@@ -139,14 +139,14 @@ export class ProductsItemsComponent implements OnInit {
         console.log('Users List', response);
 
         if (response?.success) {
-          console.log(response,'response users list');
+          console.log(response, 'response users list');
           this.products = response.data;
-          let data = _.pluck(this.products,'_id')
-           console.log(data)
+          let data = _.pluck(this.products, '_id')
+          console.log(data)
           // this.messageService.add({ severity:'success', summary: 'Success', detail: 'Users listist fetched successfully' });
         } else {
           console.log('Login Error');
-          this.messageservice.add({ severity:'error', summary: 'Error', detail: 'Failed fetching Products!!!' });
+          this.messageservice.add({ severity: 'error', summary: 'Error', detail: 'Failed fetching Products!!!' });
         }
       }, error: (error: any) => {
         console.log('Error', error);
@@ -160,7 +160,7 @@ export class ProductsItemsComponent implements OnInit {
 
   onremoveitem(event) {
     console.log(event);
-    this.cartitems = _.reject(this.cartitems,(e)=> {
+    this.cartitems = _.reject(this.cartitems, (e) => {
       return e._id === event._id;
     })
     this.cartlen = this.cartitems.length;
@@ -192,10 +192,10 @@ export class ProductsItemsComponent implements OnInit {
         producttype: i.producttype,
         price: i.price,
         qty: i.qty,
-        pownerId:i.userId,
-        productId:i._id,
+        pownerId: i.userId,
+        productId: i._id,
         consumerId: this.profileDetails._id,
-        profilename:i.profilename,
+        profilename: i.profilename,
         mobile: i.mobile,
         pincode: i.pincode,
         landmark: i.landmark,
@@ -211,9 +211,9 @@ export class ProductsItemsComponent implements OnInit {
           this.cartitems = [];
           this.cartlen = 0;
           this.fetchProducts();
-          this.messageservice.add({ severity:'success', summary: 'Success', detail: 'Order placed successfully' });
+          this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'Order placed successfully' });
         } else {
-          this.messageservice.add({ severity:'error', summary: 'Error', detail: 'Failed placing order!!!' });
+          this.messageservice.add({ severity: 'error', summary: 'Error', detail: 'Failed placing order!!!' });
         }
       }, error: (error: any) => {
         console.log('Error', error);

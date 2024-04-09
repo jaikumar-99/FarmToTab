@@ -24,35 +24,35 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   // update form
   updateForm!: FormGroup;
   AddProducts!: FormGroup;
-  addProducts:boolean = false;
+  addProducts: boolean = false;
   crops: any = [];
   selectedCrop: any = null;
 
-  constructor(private appService: AppService, private formBuilder: FormBuilder,private messageservice: MessageService) { }
+  constructor(private appService: AppService, private formBuilder: FormBuilder, private messageservice: MessageService) { }
 
   ngOnInit(): void {
     this.profileDetails = this.appService.profileDetails;
     this.profileSubscription = this.appService.profileDetailsSubject.subscribe((value: any) => {
       if (value.email) {
-        this.profileDetails = this.appService.profileDetails;
+        this.profileDetails = value;
       }
     });
 
     this.updateForm = this.formBuilder.group({
-      profilename: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(20)]],
-      mobile: [null, [Validators.required,Validators.pattern('^\\+?[1-9]\\d{1,14}$')]],
-      pincode: [null, [Validators.required,Validators.minLength(6), Validators.maxLength(6)]],
-      landmark: [null, [Validators.required,Validators.minLength(8), Validators.maxLength(20)]],
-      state: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(15)]],
-      country: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(15)]],
+      profilename: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      mobile: [null, [Validators.required, Validators.pattern('^\\+?[1-9]\\d{1,14}$')]],
+      pincode: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+      landmark: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+      state: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      country: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       totalland: [null, [Validators.required]],
     })
 
     this.AddProducts = this.formBuilder.group({
-      productname: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(20)]],
-      description: [null, [Validators.required,Validators.minLength(3), Validators.maxLength(20)]],
-      price: [null, [Validators.required,Validators.minLength(2), Validators.maxLength(10)]],
-      qty: [null, [Validators.required,Validators.minLength(1), Validators.maxLength(10)]],
+      productname: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      price: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+      qty: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     })
 
 
@@ -78,7 +78,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.updateForm.reset();
     this.AddProducts.reset();
     this.editingEnabled = false;
-    this.addProducts= false;
+    this.addProducts = false;
   }
 
 
@@ -116,7 +116,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.editingEnabled = false;
           this.updateForm.reset();
         } else {
-          this.messageservice.add({ severity:'success', summary: 'Success', detail: 'User Update Failed' });
+          this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'User Update Failed' });
           console.log('Unable to update!');
         }
       }, error: (error: any) => {
@@ -138,7 +138,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   onaddSubmit() {
     console.log(this.AddProducts.value)
     {
-  }
+    }
     const payload = {
       productname: this.AddProducts.value.productname.cropname,
       cropcode: this.AddProducts.value.productname.cropcode,
@@ -169,7 +169,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.AddProducts.reset();
           this.updateForm.reset();
         } else {
-          this.messageservice.add({ severity:'success', summary: 'Success', detail: 'Unable to add Product!!!' });
+          this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'Unable to add Product!!!' });
           console.log('Unable to update!');
         }
       }, error: (error: any) => {

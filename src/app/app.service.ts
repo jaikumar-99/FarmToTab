@@ -20,27 +20,31 @@ export class AppService {
 
   constructor(public http: HttpClient, private appsettings: AppSettingsService, private router: Router) {
     if (sessionStorage.getItem('access_token')) {
-      this.getLoggedInUserDetails({}).subscribe({
-        next: (response: any) => {
-          if (response && response.success) {
-            this.profileDetails = response.data;
-            this.profileDetailsSubject.next(this.profileDetails);
-
-            sessionStorage.setItem('email', response.data.email);
-            sessionStorage.setItem('role', response.data.role);
-            this.changeVariable(true);
-
-            if (response.data.role === 1) {
-              this.router.navigate(['/user-profile']);
-            } else if (response.data.role === 3) {
-              this.router.navigate(['/users']);
-            }
-          }
-        }
-      });
+      this.fetchUserProfileDetaisl();
     }
   }
 
+  // fetching user details
+  fetchUserProfileDetaisl() {
+    this.getLoggedInUserDetails({}).subscribe({
+      next: (response: any) => {
+        if (response && response.success) {
+          this.profileDetails = response.data;
+          this.profileDetailsSubject.next(this.profileDetails);
+
+          sessionStorage.setItem('email', response.data.email);
+          sessionStorage.setItem('role', response.data.role);
+          this.changeVariable(true);
+
+          if (response.data.role === 1) {
+            this.router.navigate(['/user-profile']);
+          } else if (response.data.role === 3) {
+            this.router.navigate(['/users']);
+          }
+        }
+      }
+    });
+  }
 
   getuserslist() {
     const url = this.appsettings.APIS.GET_USER;

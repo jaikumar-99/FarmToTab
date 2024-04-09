@@ -28,7 +28,7 @@ export class AuthComponent {
     private formbuilder: FormBuilder,
     public router: Router,
     private appservice: AppService,
-    private messageService:MessageService
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -107,13 +107,17 @@ export class AuthComponent {
           this.signUpForm.reset();
           this.LoginForm.reset();
           this.appservice.changeVariable(true);
+
+          this.appservice.profileDetailsSubject.next({ email: this.appservice.profileDetailsSubject, role: response.data.role });
+
+          this.appservice.fetchUserProfileDetaisl();
           // this.checkstatus();
           this.router.navigate(['/users']);
           console.log("Login Submitted");
-          this.messageService.add({ severity:'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
+          this.messageService.add({ severity: 'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
         } else {
           console.log('Login Error');
-          this.messageService.add({ severity:'error', summary: 'Error', detail: `${response.message}` });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: `${response.message}` });
         }
       }, error: (error: any) => {
         console.log('Error', error);
@@ -149,10 +153,10 @@ export class AuthComponent {
           // this.checkstatus();
           this.router.navigate(['/users']);
           console.log("Sign Up Form Submitted");
-          this.messageService.add({ severity:'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
+          this.messageService.add({ severity: 'Success', summary: 'Success', detail: 'Hi How are doing today!!!' });
         } else {
           console.log('Login Error');
-          this.messageService.add({ severity:'error', summary: 'Error', detail: 'Signup Failed!!!' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Signup Failed!!!' });
         }
       }, error: (error: any) => {
         console.log('Error', error);
