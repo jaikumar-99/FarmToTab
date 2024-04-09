@@ -10,10 +10,17 @@
 
         <ng-container *ngIf="profileDetails?.role === 3">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/users">Users</a>
+            <a class="nav-link" routerLink="/users"
+              [ngClass]="{'current-tab': currentUrl === '/users' }">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" routerLink="/crops">Crops</a>
+            <a class="nav-link" aria-current="page" [ngClass]="{'current-tab': currentUrl === '/crops' }"
+              routerLink="/crops">Crops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/orders"
+              [ngClass]="{'current-tab': currentUrl === '/orders' }">Order History</a>
+                      
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link"routerLink="/users">Users</a>

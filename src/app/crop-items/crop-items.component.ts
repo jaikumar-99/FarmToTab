@@ -18,10 +18,15 @@ export class CropItemsComponent {
   searchdata: any = null;
   editingEnabled: boolean = false;
   updateId: string = null;
-  constructor(private appservice: AppService, private FormBuilder: FormBuilder,public messageService: MessageService) { }
-  
 
-  ngOnInit(){ 
+  // shimmers
+  enableShimmers = true;
+
+
+  constructor(private appservice: AppService, private FormBuilder: FormBuilder,public messageService: MessageService) { }
+
+
+  ngOnInit(){
     this.myForm = this.FormBuilder.group({
       croptype: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       cropname: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -40,7 +45,9 @@ export class CropItemsComponent {
       next: (response: any) => {
         this.crops = response.data;
         this.loading = false;
+        this.enableShimmers = false;
       }, error: (error: any) => {
+        this.enableShimmers = false;
         console.log('Error', error);
       }
     })

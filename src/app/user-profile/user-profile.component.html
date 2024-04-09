@@ -19,7 +19,7 @@
 
 
 
-  <div class="profile-parts">
+  <div [ngClass]="{'profile-parts':!editingEnabled}">
     <ng-container *ngIf="!editingEnabled">
       <div class="col-12 md:col-6">
         <div class="card">

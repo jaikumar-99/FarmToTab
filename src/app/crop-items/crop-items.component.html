@@ -4,7 +4,25 @@
 </div>
 
 <div class="card" *ngIf="!formVisible">
-    <!-- <button (click)="toggleForm()">Toggle Form</button> -->
+
+  <ng-container *ngIf="enableShimmers">
+    <div class="border-round border-1 surface-border p-4 surface-card">
+      <ul class="m-0 p-0 list-none">
+
+        <li class="mb-3" *ngFor="let shimmer of [].constructor(8)">
+          <div class="card flex">
+            <!-- <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton> -->
+            <div style="flex: 1">
+              <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+              <p-skeleton width="75%"></p-skeleton>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!enableShimmers">
     <p-table
         #dt1
         [value]="crops"
@@ -171,16 +189,18 @@
             </tr>
         </ng-template>
     </p-table>
+  </ng-container>
+    <!-- <button (click)="toggleForm()">Toggle Form</button> -->
 </div>
 
 <!-- <div *ngIf="formVisible">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <label for="field1">Field 1:</label>
       <input type="text" id="field1" formControlName="field1">
-  
+
       <label for="field2">Field 2:</label>
       <input type="text" id="field2" formControlName="field2">
-  
+
       <button type="submit">Submit</button>
     </form>
 </div> -->
@@ -201,7 +221,7 @@
               <ng-container *ngIf="myForm.get('croptype')?.hasError('maxlength')">Crop Type must not exceed 20
                 characters</ng-container>
           </div>
-        
+
           <div class="flex">
             <p class="profile-head">Crop Name</p>
             <input type="text" placeholder="crop name" class="p-inputtext-sm prof-inp" pInputText formControlName="cropname">

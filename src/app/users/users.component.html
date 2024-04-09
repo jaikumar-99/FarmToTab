@@ -1,5 +1,24 @@
 
 <div class="card">
+
+  <ng-container *ngIf="enableShimmers">
+    <div class="border-round border-1 surface-border p-4 surface-card">
+      <ul class="m-0 p-0 list-none">
+
+        <li class="mb-3" *ngFor="let shimmer of [].constructor(8)">
+          <div class="card flex">
+            <!-- <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton> -->
+            <div style="flex: 1">
+              <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+              <p-skeleton width="75%"></p-skeleton>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!enableShimmers">
     <p-table
         #dt1
         [value]="users"
@@ -171,4 +190,5 @@
             </tr>
         </ng-template>
     </p-table>
+  </ng-container>
 </div>

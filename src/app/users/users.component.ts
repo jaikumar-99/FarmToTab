@@ -26,6 +26,9 @@ export class UsersComponent {
 
   activityValues: number[] = [0, 100];
 
+  // shimmers
+  enableShimmers = true;
+
   constructor(private appservice: AppService,public messageService: MessageService) { }
   ngOnInit() {
     // this.users = [{ name: 'Abhi', state: 'Karnataka', utype: 'Farmer', status: 'Active' }, { name: 'Jai', state: 'Andhra Pradesh', utype: 'Farmer', status: 'Active' }, { name: 'Abhishek', state: 'Andhra Pradesh', utype: 'Consumer', status: 'Inactive' }];
@@ -63,13 +66,16 @@ export class UsersComponent {
         if (response?.success) {
           console.log(response,'response users list');
           this.users = response.data;
+          this.enableShimmers = false;
           // this.messageService.add({ severity:'success', summary: 'Success', detail: 'Users listist fetched successfully' });
         } else {
           console.log('Login Error');
           this.messageService.add({ severity:'error', summary: 'Error', detail: 'Failed fetching users!!!' });
+          this.enableShimmers = false;
         }
       }, error: (error: any) => {
         console.log('Error', error);
+        this.enableShimmers = false;
       }
     })
   }
@@ -78,7 +84,7 @@ export class UsersComponent {
   onDelete(event:any) {
     console.log(event, 'event');
 
-    this.appservice.deleteUser({id:event._id}).subscribe({  
+    this.appservice.deleteUser({id:event._id}).subscribe({
       next: (response: any) => {
         console.log('Delete Response', response);
         if (response?.success) {
