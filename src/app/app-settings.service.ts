@@ -3,6 +3,7 @@ import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import CryptoJs from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,7 @@ export class AppSettingsService {
   }
 
   requestServer(body: any, url: string) {
-    // const encData = { stinky: this.encrypt(body) };
-    const encData = body;
+    const encData = { cheese: this.encrypt(body) };
 
     return this.httpClient.post(url, encData).pipe(
       map((response: any) => {
@@ -42,10 +42,38 @@ export class AppSettingsService {
           sessionStorage.clear();
           this.router.navigate(['/login']);
         }
-        // response = this.decrypt(response.spicy);
-        // response = response;
+        response = this.decrypt(response.cheese);
+        response = response;
         return response;
       })
     );
+  }
+
+  encrypt(dataToEncrypt: any) {
+    try {
+      const encryptedText = CryptoJs.AES.encrypt(
+        JSON.stringify(dataToEncrypt),
+        environment.hashkey
+      ).toString();
+      // console.log('\n\nEncoded String', encryptedText);
+      // console.log(this.decryptService(encryptedText));
+
+      return encryptedText;
+    } catch (error) {
+      return;
+    }
+  }
+
+  // decrypt data using nodejs crypto module
+  decrypt(dataToDecrypt: any) {
+    try {
+      const bytes = CryptoJs.AES.decrypt(dataToDecrypt, environment.hashkey);
+      const decryptedText = JSON.parse(bytes.toString(CryptoJs.enc.Utf8));
+      // console.log('\n\nDecoded String', decryptedText);
+
+      return decryptedText;
+    } catch (error) {
+      return false;
+    }
   }
 }
