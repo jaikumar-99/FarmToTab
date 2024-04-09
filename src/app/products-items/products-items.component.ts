@@ -27,59 +27,10 @@ export class ProductsItemsComponent implements OnInit {
   profileDetails: any = {};
   // subscriptions
   profileSubscription: Subscription;
-  // = [
-  //   {
-  //     id: '1000',
-  //     code: 'f230fh0g3',
-  //     name: 'Bamboo Watch',
-  //     description: 'Product Description',
-  //     image: 'bamboo-watch.jpg',
-  //     price: 65,
-  //     category: 'Accessories',
-  //     quantity: 24,
-  //     inventoryStatus: 'INSTOCK',
-  //     rating: 5
-  //   },
-  //   {
-  //     id: '1000',
-  //     code: 'f230fh0g3',
-  //     name: 'Bamboo Watch',
-  //     description: 'Product Description',
-  //     image: 'bamboo-watch.jpg',
-  //     price: 65,
-  //     category: 'Accessories',
-  //     quantity: 24,
-  //     inventoryStatus: 'INSTOCK',
-  //     rating: 5
-  //   },
-  //   {
-  //     id: '1000',
-  //     code: 'f230fh0g3',
-  //     name: 'Bamboo Watch',
-  //     description: 'Product Description',
-  //     image: 'bamboo-watch.jpg',
-  //     price: 65,
-  //     category: 'Accessories',
-  //     quantity: 24,
-  //     inventoryStatus: 'INSTOCK',
-  //     rating: 5
-  //   },
-  //   {
-  //     id: '1000',
-  //     code: 'f230fh0g3',
-  //     name: 'Bamboo Watch',
-  //     description: 'Product Description',
-  //     image: 'bamboo-watch.jpg',
-  //     price: 65,
-  //     category: 'Accessories',
-  //     quantity: 24,
-  //     inventoryStatus: 'INSTOCK',
-  //     rating: 5
-  //   },
-  //   { name: 'test', image: 'bracelet.jpg', rating: 5, category: 'category', inventoryStatus: 'INSTOCK', price: 45 },
-  //   { name: 'test', image: 'bracelet.jpg', rating: 5, category: 'category', inventoryStatus: 'INSTOCK', price: 45 },
-  //   { name: 'test', image: 'bracelet.jpg', rating: 5, category: 'category', inventoryStatus: 'INSTOCK', price: 45 },
-  // ]
+
+  // shimmers
+  enableShimmers = true;
+
 
   constructor(private appservice: AppService, private messageservice: MessageService) {
 
@@ -143,13 +94,16 @@ export class ProductsItemsComponent implements OnInit {
           this.products = response.data;
           let data = _.pluck(this.products, '_id')
           console.log(data)
+          this.enableShimmers = false;
           // this.messageService.add({ severity:'success', summary: 'Success', detail: 'Users listist fetched successfully' });
         } else {
           console.log('Login Error');
           this.messageservice.add({ severity: 'error', summary: 'Error', detail: 'Failed fetching Products!!!' });
+          this.enableShimmers = false;
         }
       }, error: (error: any) => {
         console.log('Error', error);
+        this.enableShimmers = false;
       }
     })
   }
