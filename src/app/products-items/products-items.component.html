@@ -57,6 +57,8 @@
                         <!-- <i class="pi pi-tag"></i>
                         <span class="font-semibold">{{ product.producttype }}</span> -->
                       </span>
+                      <button class="btn-black" (click)="openProductDetails(product)">Farmer Details</button>
+
                       <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag> -->
                     </div>
                   </div>
@@ -107,6 +109,7 @@
                 <p-tag severity="success" [rounded]="true">
                   <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
                 </p-tag>
+                <button class="btn-black" (click)="openProductDetails(product)">Farmer Details</button>
                 <button pButton icon="pi pi-shopping-cart" class="p-button-rounded"
                   (click)="onaddcart(product)"></button>
               </div>
@@ -138,4 +141,77 @@
     </ng-template>
   </p-orderList>
   <button pButton class="md:align-self-end mb-2 p-button-rounded" (click)="placeOrder()">Order</button>
+</div>
+
+
+
+<div class="card" *ngIf="productItem.productname">
+  <p-dialog [visible]="productItem.productname ? true : false">
+    <ng-template pTemplate="headless">
+      <div class="flex flex-column px-8 py-5 gap-4 modal-open">
+
+        <ng-container>
+          <div class="col-12 md:col-6">
+            <div class="card">
+              <div class="flex">
+                <p class="profile-head">Product Name</p>
+                <p class="profile-tail">{{productItem?.productname ? productItem?.productname : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Product Type</p>
+                <p class="profile-tail">{{productItem?.producttype ? (productItem?.producttype | titlecase) :
+                  '&mdash;'}}
+                </p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Quantity</p>
+                <p class="profile-tail" style="text-wrap: nowrap">{{productItem?.qty ? productItem?.qty : '&mdash;'}}
+                </p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Price</p>
+                <p class="profile-tail">{{productItem?.price ? productItem?.price : '&mdash;'}}</p>
+              </div>
+
+              <div class="flex">
+                <p class="profile-head">Product Sold By</p>
+                <p class="profile-tail" style="text-wrap: nowrap">{{productItem?.userId?.profilename ?
+                  (productItem?.userId?.profilename | titlecase) : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Mobile Number</p>
+                <p class="profile-tail">{{productItem?.userId?.mobile ? productItem?.userId?.mobile: '&mdash;'}}</p>
+              </div>
+
+              <div class="flex">
+                <p class="profile-head">State</p>
+                <p class="profile-tail">{{productItem?.userId?.state ? (productItem?.userId?.state | titlecase):
+                  '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Country</p>
+                <p class="profile-tail">{{productItem?.userId?.country ? (productItem?.userId?.country | titlecase):
+                  '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Pincode</p>
+                <p class="profile-tail">{{productItem?.userId?.pincode ? productItem?.userId?.pincode : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Land Mark</p>
+                <span class="profile-tail" style="text-wrap: nowrap">{{productItem?.userId?.landmark ?
+                  (productItem?.userId?.landmark |
+                  titlecase): '&mdash;'}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+
+        <div class="flex align-items-center gap-2">
+          <button (click)="closeProductDetails()" [text]="true" class="btn-black w-full">Close</button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
 </div>

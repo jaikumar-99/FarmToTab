@@ -100,6 +100,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       state: this.updateForm.value.state,
       country: this.updateForm.value.country,
       totalland: `${this.updateForm.value.totalland}`,
+      role: `${this.profileDetails.role}`,
     }
 
     console.log('Updated Values', payload);
@@ -109,14 +110,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         console.log('Profile Response', response);
 
         if (response?.success) {
-          // this.profileDetails = response.data;
-          this.appService.profileDetails = response.data;
-          this.appService.profileDetailsSubject.next(this.appService.profileDetails);
+          this.profileDetails = JSON.parse(JSON.stringify(response.data));
+          this.appService.profileDetails = this.profileDetails;
+          this.appService.profileDetailsSubject.next(this.profileDetails);
 
           this.editingEnabled = false;
           this.updateForm.reset();
+          this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'Profile Details Updated!' });
         } else {
-          this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'User Update Failed' });
+          this.messageservice.add({ severity: 'error', summary: 'Error', detail: 'Unable to update profile details!' });
           console.log('Unable to update!');
         }
       }, error: (error: any) => {

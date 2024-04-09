@@ -12,7 +12,9 @@
       </p>
       <div class="button-container" *ngIf="!editingEnabled && !addProducts">
         <!-- <p-button class="justify-content-right btn-black"  label="Add Products" (click)="onadd()"></p-button> -->
-        <button class="justify-content-right btn-black" (click)="onadd()">Add Products</button>
+        <button class="justify-content-right btn-black"
+          *ngIf="profileDetails?.totalland && profileDetails?.profilename && profileDetails?.pincode && profileDetails?.mobile"
+          (click)="onadd()">Add Products</button>
       </div>
     </span>
   </div>

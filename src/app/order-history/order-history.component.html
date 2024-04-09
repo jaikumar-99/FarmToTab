@@ -120,7 +120,7 @@
 </div>
 
 
-<div class="card">
+<div class="card" *ngIf="orderItem.consumerId">
   <p-dialog [visible]="orderItem.consumerId ? true : false">
     <ng-template pTemplate="headless">
       <div class="flex flex-column px-8 py-5 gap-4 modal-open">
@@ -134,11 +134,19 @@
               </div>
               <div class="flex">
                 <p class="profile-head">Product Type</p>
-                <p class="profile-tail">{{orderItem?.producttype ? orderItem?.producttype : '&mdash;'}}</p>
+                <p class="profile-tail">{{orderItem?.producttype ? (orderItem?.producttype | titlecase) : '&mdash;'}}</p>
               </div>
               <div class="flex">
                 <p class="profile-head">Quantity</p>
                 <p class="profile-tail" style="text-wrap: nowrap">{{orderItem?.qty ? orderItem?.qty : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Product Sold By</p>
+                <p class="profile-tail" style="text-wrap: nowrap">{{orderItem?.pownerId?.profilename ? (orderItem?.pownerId?.profilename | titlecase) : '&mdash;'}}</p>
+              </div>
+              <div class="flex">
+                <p class="profile-head">Product Purchased By</p>
+                <p class="profile-tail" style="text-wrap: nowrap">{{orderItem?.consumerId?.profilename ? (orderItem?.consumerId?.profilename | titlecase) : '&mdash;'}}</p>
               </div>
               <div class="flex">
                 <p class="profile-head">Price</p>
@@ -153,11 +161,11 @@
 
               <div class="flex">
                 <p class="profile-head">State</p>
-                <p class="profile-tail">{{orderItem?.state ? orderItem?.state: '&mdash;'}}</p>
+                <p class="profile-tail">{{orderItem?.state ? (orderItem?.state | titlecase): '&mdash;'}}</p>
               </div>
               <div class="flex">
                 <p class="profile-head">Country</p>
-                <p class="profile-tail">{{orderItem?.country ? orderItem?.country: '&mdash;'}}</p>
+                <p class="profile-tail">{{orderItem?.country ? (orderItem?.country | titlecase): '&mdash;'}}</p>
               </div>
               <div class="flex">
                 <p class="profile-head">Pincode</p>
@@ -165,7 +173,7 @@
               </div>
               <div class="flex">
                 <p class="profile-head">Land Mark</p>
-                <span class="profile-tail" style="text-wrap: nowrap">{{orderItem?.landmark ? orderItem?.landmark: '&mdash;'}}</span>
+                <span class="profile-tail" style="text-wrap: nowrap">{{orderItem?.landmark ? (orderItem?.landmark | titlecase): '&mdash;'}}</span>
               </div>
 
               <div class="flex">

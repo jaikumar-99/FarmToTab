@@ -21,6 +21,7 @@ export class ProductsItemsComponent implements OnInit {
 
   // products
   products: any = [];
+  productItem: any = {};
 
   cartitems: any = [];
   viewcart: boolean = false;
@@ -146,7 +147,7 @@ export class ProductsItemsComponent implements OnInit {
         producttype: i.producttype,
         price: i.price,
         qty: i.qty,
-        pownerId: i.userId,
+        pownerId: i.userId._id,
         productId: i._id,
         consumerId: this.profileDetails._id,
         profilename: i.profilename,
@@ -173,5 +174,16 @@ export class ProductsItemsComponent implements OnInit {
         console.log('Error', error);
       }
     })
+  }
+
+
+  openProductDetails(product: any) {
+    console.log('product details', product);
+    this.productItem = product;
+  }
+
+  closeProductDetails() {
+    console.log('Closing the product details!')
+    this.productItem = {};
   }
 }
