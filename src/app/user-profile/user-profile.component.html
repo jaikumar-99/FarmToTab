@@ -10,203 +10,220 @@
         <!-- <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i> -->
         <i class="pi pi-pencil profile-edit" *ngIf="!editingEnabled && !addProducts"></i>
       </p>
+      <div class="button-container" *ngIf="!editingEnabled && !addProducts">
+        <!-- <p-button class="justify-content-right btn-black"  label="Add Products" (click)="onadd()"></p-button> -->
+        <button class="justify-content-right btn-black" (click)="onadd()">Add Products</button>
+      </div>
     </span>
   </div>
 
-  <div class="button-container" *ngIf="!editingEnabled && !addProducts">
-    <p-button class="justify-content-right" label="Add Products" (click)="onadd()"></p-button>
-</div>
 
 
-  <ng-container *ngIf="!editingEnabled && !addProducts">
-    <div class="col-12 md:col-6">
-      <div class="card">
-        <div class="flex">
-          <p class="profile-head">Profile Name</p>
-          <p class="profile-tail">{{profileDetails?.profilename ? profileDetails?.profilename : '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Email</p>
-          <p class="profile-tail">{{profileDetails?.email}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">State</p>
-          <p class="profile-tail">{{profileDetails?.state ? profileDetails?.state: '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Country</p>
-          <p class="profile-tail">{{profileDetails?.country ? profileDetails?.country: '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Pincode</p>
-          <p class="profile-tail">{{profileDetails?.pincode ? profileDetails?.pincode : '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Land Mark</p>
-          <p class="profile-tail">{{profileDetails?.landmark ? profileDetails?.landmark: '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Total Land Hacters</p>
-          <p class="profile-tail">{{profileDetails?.totalland ? profileDetails?.totalland: '&mdash;'}}</p>
-        </div>
-        <div class="flex">
-          <p class="profile-head">Mobile Number</p>
-          <p class="profile-tail">{{profileDetails?.mobile ? profileDetails?.mobile: '&mdash;'}}</p>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="editingEnabled && !addProducts">
-    <form [formGroup]="updateForm">
+  <div class="profile-parts">
+    <ng-container *ngIf="!editingEnabled">
       <div class="col-12 md:col-6">
         <div class="card">
           <div class="flex">
             <p class="profile-head">Profile Name</p>
-            <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="profilename">
+            <p class="profile-tail">{{profileDetails?.profilename ? profileDetails?.profilename : '&mdash;'}}</p>
           </div>
-          <div class="form-error" *ngIf="updateForm.get('profilename')?.errors && updateForm.get('profilename')?.dirty">
-            <ng-container *ngIf="updateForm.get('profilename')?.hasError('required')">Profile name is required</ng-container>
-            <ng-container *ngIf="updateForm.get('profilename')?.hasError('minlength')">Profile Name must be at least 8
-                characters</ng-container>
-              <ng-container *ngIf="updateForm.get('profilename')?.hasError('maxlength')">Profile Name must not exceed 20
-                characters</ng-container>
-          </div>
-
           <div class="flex">
             <p class="profile-head">Email</p>
             <p class="profile-tail">{{profileDetails?.email}}</p>
           </div>
-
           <div class="flex">
             <p class="profile-head">State</p>
-            <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="state">
+            <p class="profile-tail">{{profileDetails?.state ? profileDetails?.state: '&mdash;'}}</p>
           </div>
-          <div class="form-error" *ngIf="updateForm.get('state')?.errors && updateForm.get('state')?.dirty">
-            <ng-container *ngIf="updateForm.get('state')?.hasError('required')">State is required</ng-container>
-            <ng-container *ngIf="updateForm.get('state')?.hasError('minlength')">State Name must be at least 3
+          <div class="flex">
+            <p class="profile-head">Country</p>
+            <p class="profile-tail">{{profileDetails?.country ? profileDetails?.country: '&mdash;'}}</p>
+          </div>
+          <div class="flex">
+            <p class="profile-head">Pincode</p>
+            <p class="profile-tail">{{profileDetails?.pincode ? profileDetails?.pincode : '&mdash;'}}</p>
+          </div>
+          <div class="flex">
+            <p class="profile-head">Land Mark</p>
+            <p class="profile-tail">{{profileDetails?.landmark ? profileDetails?.landmark: '&mdash;'}}</p>
+          </div>
+          <div class="flex">
+            <p class="profile-head">Total Land Hacters</p>
+            <p class="profile-tail">{{profileDetails?.totalland ? profileDetails?.totalland: '&mdash;'}}</p>
+          </div>
+          <div class="flex">
+            <p class="profile-head">Mobile Number</p>
+            <p class="profile-tail">{{profileDetails?.mobile ? profileDetails?.mobile: '&mdash;'}}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="editingEnabled">
+      <form [formGroup]="updateForm">
+        <div class="col-12 md:col-6">
+          <div class="card">
+            <div class="flex">
+              <p class="profile-head">Profile Name</p>
+              <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="profilename">
+            </div>
+            <div class="form-error"
+              *ngIf="updateForm.get('profilename')?.errors && updateForm.get('profilename')?.dirty">
+              <ng-container *ngIf="updateForm.get('profilename')?.hasError('required')">Profile name is
+                required</ng-container>
+              <ng-container *ngIf="updateForm.get('profilename')?.hasError('minlength')">Profile Name must be at least 8
+                characters</ng-container>
+              <ng-container *ngIf="updateForm.get('profilename')?.hasError('maxlength')">Profile Name must not exceed 20
+                characters</ng-container>
+            </div>
+
+            <div class="flex">
+              <p class="profile-head">Email</p>
+              <p class="profile-tail">{{profileDetails?.email}}</p>
+            </div>
+
+            <div class="flex">
+              <p class="profile-head">State</p>
+              <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="state">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('state')?.errors && updateForm.get('state')?.dirty">
+              <ng-container *ngIf="updateForm.get('state')?.hasError('required')">State is required</ng-container>
+              <ng-container *ngIf="updateForm.get('state')?.hasError('minlength')">State Name must be at least 3
                 characters</ng-container>
               <ng-container *ngIf="updateForm.get('state')?.hasError('maxlength')">State Name must not exceed 15
                 characters</ng-container>
-          </div>
+            </div>
 
-          <div class="flex">
-            <p class="profile-head">Country</p>
-            <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="country">
-          </div>
-          <div class="form-error" *ngIf="updateForm.get('country')?.errors && updateForm.get('country')?.dirty">
-            <ng-container *ngIf="updateForm.get('country')?.hasError('required')">Country is required</ng-container>
-            <ng-container *ngIf="updateForm.get('country')?.hasError('minlength')">Country Name must be at least 3
+            <div class="flex">
+              <p class="profile-head">Country</p>
+              <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="country">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('country')?.errors && updateForm.get('country')?.dirty">
+              <ng-container *ngIf="updateForm.get('country')?.hasError('required')">Country is required</ng-container>
+              <ng-container *ngIf="updateForm.get('country')?.hasError('minlength')">Country Name must be at least 3
                 characters</ng-container>
               <ng-container *ngIf="updateForm.get('country')?.hasError('maxlength')">Country Name must not exceed 15
                 characters</ng-container>
-          </div>
+            </div>
 
-          <div class="flex">
-            <p class="profile-head">Pincode</p>
-            <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="pincode">
-          </div>
-          <div class="form-error" *ngIf="updateForm.get('pincode')?.errors && updateForm.get('pincode')?.dirty">
-            <ng-container *ngIf="updateForm.get('pincode')?.hasError('required')">Pincode is required</ng-container>
-            <ng-container *ngIf="updateForm.get('pincode')?.hasError('minlength')">Pincode must be at least 6
+            <div class="flex">
+              <p class="profile-head">Pincode</p>
+              <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="pincode">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('pincode')?.errors && updateForm.get('pincode')?.dirty">
+              <ng-container *ngIf="updateForm.get('pincode')?.hasError('required')">Pincode is required</ng-container>
+              <ng-container *ngIf="updateForm.get('pincode')?.hasError('minlength')">Pincode must be at least 6
                 characters</ng-container>
               <ng-container *ngIf="updateForm.get('pincode')?.hasError('maxlength')">Pincode must not exceed 6
                 characters</ng-container>
-          </div>
+            </div>
 
-          <div class="flex">
-            <p class="profile-head">Land Mark</p>
-            <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="landmark">
-          </div>
-          <div class="form-error" *ngIf="updateForm.get('landmark')?.errors && updateForm.get('landmark')?.dirty">
-            <ng-container *ngIf="updateForm.get('landmark')?.hasError('required')">Landmark is required</ng-container>
-            <ng-container *ngIf="updateForm.get('landmark')?.hasError('minlength')">Landmark must be at least 8
+            <div class="flex">
+              <p class="profile-head">Land Mark</p>
+              <input type="text" class="p-inputtext-sm prof-inp" pInputText formControlName="landmark">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('landmark')?.errors && updateForm.get('landmark')?.dirty">
+              <ng-container *ngIf="updateForm.get('landmark')?.hasError('required')">Landmark is required</ng-container>
+              <ng-container *ngIf="updateForm.get('landmark')?.hasError('minlength')">Landmark must be at least 8
                 characters</ng-container>
               <ng-container *ngIf="updateForm.get('landmark')?.hasError('maxlength')">Landmark must not exceed 20
                 characters</ng-container>
-          </div>
+            </div>
 
-          <div class="flex">
-            <p class="profile-head">Total Land Hacters</p>
-            <input type="number" class="p-inputtext-sm prof-inp" pInputText formControlName="totalland">
-          </div>
-          <div class="form-error" *ngIf="updateForm.get('totalland')?.errors && updateForm.get('totalland')?.dirty">
-            <ng-container *ngIf="updateForm.get('totalland')?.hasError('required')">Total Land is required</ng-container>
-            <!-- <ng-container *ngIf="updateForm.get('totalland')?.hasError('minlength')">Profile Name must be at least 8
-                characters</ng-container>
-              <ng-container *ngIf="updateForm.get('totalland')?.hasError('maxlength')">Profile Name must not exceed 20
-                characters</ng-container> -->
-          </div>
+            <div class="flex">
+              <p class="profile-head">Total Land Hacters</p>
+              <input type="number" class="p-inputtext-sm prof-inp" pInputText formControlName="totalland">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('totalland')?.errors && updateForm.get('totalland')?.dirty">
+              <ng-container *ngIf="updateForm.get('totalland')?.hasError('required')">Total Land is
+                required</ng-container>
+              <!-- <ng-container *ngIf="updateForm.get('totalland')?.hasError('minlength')">Profile Name must be at least 8
+                  characters</ng-container>
+                <ng-container *ngIf="updateForm.get('totalland')?.hasError('maxlength')">Profile Name must not exceed 20
+                  characters</ng-container> -->
+            </div>
 
-          <div class="flex">
-            <p class="profile-head">Mobile Number</p>
-            <input type="number" class="p-inputtext-sm prof-inp" pInputText formControlName="mobile">
-          </div>
-          <div class="form-error" *ngIf="updateForm.get('mobile')?.errors && updateForm.get('mobile')?.dirty">
-            <ng-container *ngIf="updateForm.get('mobile')?.hasError('required')">Mobile number is required</ng-container>
-            <!-- <ng-container *ngIf="updateForm.get('profilename')?.hasError('minlength')">Profile Name must be at least 8
-                characters</ng-container>
-                
-              <ng-container *ngIf="updateForm.get('profilename')?.hasError('maxlength')">Profile Name must not exceed 20
-                characters</ng-container> -->
-                <ng-container *ngIf="updateForm.get('mobile').errors?.pattern && updateForm.get('mobile').touched">
-                  Please enter a valid mobile number.
-                </ng-container>
-          </div>
+            <div class="flex">
+              <p class="profile-head">Mobile Number</p>
+              <input type="number" class="p-inputtext-sm prof-inp" pInputText formControlName="mobile">
+            </div>
+            <div class="form-error" *ngIf="updateForm.get('mobile')?.errors && updateForm.get('mobile')?.dirty">
+              <ng-container *ngIf="updateForm.get('mobile')?.hasError('required')">Mobile number is
+                required</ng-container>
+              <!-- <ng-container *ngIf="updateForm.get('profilename')?.hasError('minlength')">Profile Name must be at least 8
+                  characters</ng-container>
 
-          <div class="footer flex">
-            <button class="btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="margin-min btn-approve" (click)="onUpdate()">Update</button>
+                <ng-container *ngIf="updateForm.get('profilename')?.hasError('maxlength')">Profile Name must not exceed 20
+                  characters</ng-container> -->
+              <ng-container *ngIf="updateForm.get('mobile').errors?.pattern && updateForm.get('mobile').touched">
+                Please enter a valid mobile number.
+              </ng-container>
+            </div>
+
+            <div class="footer flex">
+              <button class="btn-cancel" (click)="onCancel()">Cancel</button>
+              <button class="margin-min btn-approve" (click)="onUpdate()">Update</button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-  </ng-container>
+      </form>
+    </ng-container>
 
 
-  <ng-container *ngIf="addProducts">
-    <form [formGroup]="AddProducts">
-      <div class="col-6">
-        <div class="card">
-          <div class="flex">
-            <p class="profile-head justify-content-center">Product Name</p>
-            <p-dropdown formControlName="productname" [options]="crops" [(ngModel)]="selectedCrop" optionLabel="cropname" [showClear]="true" placeholder="Select a crop"></p-dropdown>
-        </div>
-          <div class="form-error" *ngIf="AddProducts.get('productname')?.errors && AddProducts.get('productname')?.dirty">
-            <ng-container *ngIf="AddProducts.get('productname')?.hasError('required')">Product Name is required</ng-container>
-          </div>
-        
-          <div class="flex">
-            <p class="profile-head">Description</p>
-            <textarea rows="5" cols="30" pInputTextarea placeholder="description" formControlName="description"></textarea>
-        </div>
-          <div class="form-error" *ngIf="AddProducts.get('description')?.errors && AddProducts.get('description')?.dirty">
-          <ng-container *ngIf="AddProducts.get('description')?.hasError('required')">Description is required</ng-container>
-            <ng-container *ngIf="AddProducts.get('description')?.hasError('minlength')">Description must be at least 8
+    <ng-container *ngIf="addProducts">
+      <div class="col-12 md:col-6">
+        <form [formGroup]="AddProducts">
+          <div class="card">
+            <div class="flex">
+              <p class="profile-head justify-content-center">Product Name</p>
+              <p-dropdown formControlName="productname" [options]="crops" [(ngModel)]="selectedCrop"
+                optionLabel="cropname" [showClear]="true" placeholder="Select a crop"></p-dropdown>
+            </div>
+            <div class="form-error"
+              *ngIf="AddProducts.get('productname')?.errors && AddProducts.get('productname')?.dirty">
+              <ng-container *ngIf="AddProducts.get('productname')?.hasError('required')">Product Name is
+                required</ng-container>
+            </div>
+
+            <div class="flex">
+              <p class="profile-head">Description</p>
+              <textarea rows="5" cols="30" pInputTextarea placeholder="description"
+                formControlName="description"></textarea>
+            </div>
+            <div class="form-error"
+              *ngIf="AddProducts.get('description')?.errors && AddProducts.get('description')?.dirty">
+              <ng-container *ngIf="AddProducts.get('description')?.hasError('required')">Description is
+                required</ng-container>
+              <ng-container *ngIf="AddProducts.get('description')?.hasError('minlength')">Description must be at least 8
                 characters</ng-container>
               <ng-container *ngIf="AddProducts.get('description')?.hasError('maxlength')">Description must not exceed 20
                 characters</ng-container>
+            </div>
+            <div class="flex">
+              <p class="profile-head">price</p>
+              <input type="number" placeholder="price" class="p-inputtext-sm prof-inp" pInputText
+                formControlName="price">
+            </div>
+            <div class="form-error" *ngIf="AddProducts.get('price')?.errors && AddProducts.get('price')?.dirty">
+              <ng-container *ngIf="AddProducts.get('price')?.hasError('required')">Price is required</ng-container>
+            </div>
+            <div class="flex">
+              <p class="profile-head">Quantity</p>
+              <input type="number" placeholder="quantity in lbs" class="p-inputtext-sm prof-inp" pInputText
+                formControlName="qty">
+            </div>
+            <div class="form-error" *ngIf="AddProducts.get('qty')?.errors && AddProducts.get('qty')?.dirty">
+              <ng-container *ngIf="AddProducts.get('qty')?.hasError('required')">Quantity is required</ng-container>
+            </div>
+            <div class="footer flex">
+              <button class="btn-cancel" (click)="onCancel()">Cancel</button>
+              <button class="margin-min btn-approve" [disabled]="AddProducts.pristine || AddProducts.invalid"
+                (click)="onaddSubmit()">Submit</button>
+            </div>
           </div>
-          <div class="flex">
-            <p class="profile-head">price</p>
-            <input type="number"  placeholder="price" class="p-inputtext-sm prof-inp" pInputText formControlName="price">
-        </div>
-          <div class="form-error" *ngIf="AddProducts.get('price')?.errors && AddProducts.get('price')?.dirty">
-          <ng-container *ngIf="AddProducts.get('price')?.hasError('required')">Price is required</ng-container>
-          </div>
-          <div class="flex">
-            <p class="profile-head">Quantity</p>
-            <input type="number"  placeholder="quantity in lbs" class="p-inputtext-sm prof-inp" pInputText formControlName="qty">
-        </div>
-          <div class="form-error" *ngIf="AddProducts.get('qty')?.errors && AddProducts.get('qty')?.dirty">
-          <ng-container *ngIf="AddProducts.get('qty')?.hasError('required')">Quantity is required</ng-container>
-          </div>
-          <div class="footer flex">
-            <button class="btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="margin-min btn-approve" [disabled]="AddProducts.pristine || AddProducts.invalid" (click)="onaddSubmit()">Submit</button>
-          </div>
-        </div>
+        </form>
       </div>
-    </form>
-  </ng-container>
+    </ng-container>
+  </div>
+
 </div>

@@ -1,6 +1,8 @@
 .button-container {
-    display: flex;
-    justify-content: flex-end;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    position: relative;
+    right: -75%;
 }
 .form-error {
     color: #f67474;
@@ -30,4 +32,8 @@
 .profile-head {
     font-weight: 700;
     min-width: 150px;
+}
+
+.profile-parts{
+  display: flex;
 }
